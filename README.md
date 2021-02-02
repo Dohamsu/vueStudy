@@ -14,30 +14,30 @@ file - Docker
 
 ### 현재 상태 
 
-Client 
+#Client 
 - 
 
-Server
+#Server
 - 기본틀 구성(node, express) 
 - Docker 환경 구축 완료
 
-DB
+#DB
 - Docker 환경 구축 완료
 
 
 
 ### TO-DO
 
-Client 
+#Client 
 - 템플릿 구성
 - 기본 틀 구현
 - 서버 연동
 
-Server
+#Server
 -  클라이언트 연동
 -  DB 연동
 
-DB
+#DB
 - ERD 구성 
 - 스토리지 사용 계획 
 
