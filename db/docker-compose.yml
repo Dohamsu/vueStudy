@@ -1,0 +1,15 @@
+version : "3"
+services : 
+ postgres:
+   image: "postgres"
+   container_name : "vue-db"
+   restart : always
+   ports:
+    - "15432:5432"
+   volumes :
+   - mydb:/var/lib/docker/volumes/mydb/_data
+   environment:
+    - POSTGRES_USER=mcnc
+    - POSTGRES_PASSWORD=gomcnc!!
+volumes:
+  mydb:
