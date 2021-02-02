@@ -1,7 +1,7 @@
 # vueStudy
 
 
-### 환경 설정
+## 환경 설정
 
 client - Vue
 
@@ -12,10 +12,10 @@ DB - PostgreSQL
 file - Docker
 
 
-### 현재 상태 
+## 현재 상태
 
-Client 
-- 
+client
+-
 
 Server
 - 기본틀 구성(node, express) 
