@@ -17,7 +17,7 @@ const client = new Client({
 // DB 연결
 client.connect();
 
-// client.query("SET TIME ZONE 'Asia/Seoul'", (err, res) => {});
+client.query("SET TIME ZONE 'Asia/Seoul'", (err, res) => {});
 
 client.query("INSERT INTO connect_list (user_id) VALUES ('mcnc')", (err, res) => {
 
