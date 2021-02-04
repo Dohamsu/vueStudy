@@ -11,7 +11,8 @@ WORKDIR /app
 
 #COPY 
 # 파일이나 디렉토리를 이미지로 복사. 일반적으로 소스를 복사하는 데 사용
-COPY pakage*.json /app
+COPY . /app
+# COPY pakage*.json /app
 
 #RUN
 # 명령어 실행 - 내부적으로 /bin/sh -c 뒤에 명령어를 실행하는 방식

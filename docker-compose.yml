@@ -5,6 +5,12 @@ version : "3"
 #service 정의
 #docker-compose로 생성 할 container 옵션 정의
 services : 
+  node-server:
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    depends_on:
+      - db
   db : #생성할 container 이름
    image: "postgres" #생성에 사용될 이미지 파일
    container_name : "vue-db" # container에 붙일 nameTag(위의 이름과 다름) 
@@ -19,14 +25,13 @@ services :
    - mydb:/var/lib/docker/volumes/mydb/_data
    #환경 변수 리스트 정의 
    environment:
+    - POSTGRES_DB=vuedb
     - POSTGRES_USER=mcnc
     - POSTGRES_PASSWORD=gomcnc!!
+    - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+
   ############################################
 
-  node-server:
-    build:
-      context: .
-      dockerfile: ./server/dockerfile
 
 volumes:
   mydb:
