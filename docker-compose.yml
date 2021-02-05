@@ -25,6 +25,7 @@ services :
    - mydb:/var/lib/docker/volumes/mydb/_data
    #환경 변수 리스트 정의 
    environment:
+    - TZ=Asia/Seoul
     - POSTGRES_DB=vuedb
     - POSTGRES_USER=mcnc
     - POSTGRES_PASSWORD=gomcnc!!

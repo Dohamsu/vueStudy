@@ -1,6 +1,7 @@
 {
   "name": "vuestd",
   "version": "1.0.0",
+  "private":true,
   "description": "vue study project",
   "main": "index.js",
   "scripts": {
