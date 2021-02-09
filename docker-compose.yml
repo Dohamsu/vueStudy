@@ -10,8 +10,14 @@ services :
       context: ./server
       dockerfile: ./Dockerfile
     depends_on:
-      - db
-  db : #생성할 container 이름
+      - vue-db
+    environment:
+      SEQ_DB: vue-db
+      SEQ_USER: mcnc
+      SEQ_PW: gomcnc!!
+      DATABASE_URL: "postgres://mcnc:gomcnc!!@db:5432/vue-db"
+
+  vue-db : #생성할 container 이름
    image: "postgres" #생성에 사용될 이미지 파일
    container_name : "vue-db" # container에 붙일 nameTag(위의 이름과 다름) 
    #docker-compose build 옵션에서 사용
@@ -20,7 +26,7 @@ services :
    #  context: . #dockerfile 의 위치 지정 
    restart : always
    ports:
-    - "15432:5432"
+    - "5432:5432"
    volumes :
    - mydb:/var/lib/docker/volumes/mydb/_data
    #환경 변수 리스트 정의 
@@ -30,7 +36,6 @@ services :
     - POSTGRES_USER=mcnc
     - POSTGRES_PASSWORD=gomcnc!!
     - POSTGRES_INITDB_ARGS=--encoding=UTF-8
-
   ############################################
 
 

@@ -26,4 +26,4 @@ CMD ["npm", "start"]
 
 #EXPOSE 
 # 도커 컨테이너가 실행되었을 때 요청을 기다리고 있는(Listen) 포트 지정. 여러개 지정 가능
-EXPOSE 15432
+EXPOSE 3000
