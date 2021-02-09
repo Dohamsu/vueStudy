@@ -7,10 +7,12 @@ version : "3"
 services : 
   node-server:
     build:
-      context: ./server
-      dockerfile: ./Dockerfile
+      context: .
+      dockerfile: Dockerfile
     depends_on:
       - vue-db
+    ports: 
+      - "3000:3000"
     environment:
       SEQ_DB: vue-db
       SEQ_USER: mcnc
