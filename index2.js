@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const { Client } = require('pg');
-var main = require('../client/main/html/main.html');
 
 
 app.set('view engine','ejs'); // 1
