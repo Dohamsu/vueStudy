@@ -5,19 +5,31 @@ version : "3"
 #service 정의
 #docker-compose로 생성 할 container 옵션 정의
 services : 
-  node-server:
+  proxy:
+    image: nginx:latest
+    container_name: proxy
+    ports: 
+      - "80:80"
+    volumes: 
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf
+    restart: "unless-stopped"
+
+  express:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./server
+    container_name: express
     depends_on:
       - vue-db
     ports: 
-      - "3000:3000"
+      - "3000"
     environment:
       SEQ_DB: vue-db
       SEQ_USER: mcnc
       SEQ_PW: gomcnc!!
       DATABASE_URL: "postgres://mcnc:gomcnc!!@db:5432/vue-db"
+    volumes:
+      - ./source:/source
+      - /source/node_modules
 
   vue-db : #생성할 container 이름
    image: "postgres" #생성에 사용될 이미지 파일
