@@ -24,7 +24,7 @@ app.use('/users', usersRouter);
 
 // 아래 코드를 app.js 에 추가한다.
 app.listen(3000, '0.0.0.0', () => {                                 
-  console.log('listen 3000 port')                                 
+  console.log('#############\n서버 시작됨...')                                 
 });
 
 // catch 404 and forward to error handler
