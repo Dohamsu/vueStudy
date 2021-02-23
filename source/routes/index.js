@@ -2,33 +2,13 @@ var express = require('express');
 var router  = express.Router();
 var app     = express();
 
+const InitController  = require('../controllers/init_controller');
 const BoardController = require('../controllers/board_controller');
 const MainController  = require('../controllers/main_controller');
 
-router.get('/',MainController.getMain);
+router.get('/', MainController.getMain);
+router.get('/init', InitController.getInit);
 
-/* 대시보드 */
-// router.get('/dashboard', function(req, res, next) {
-
-//   var data = '';
-
-//   client.query("SELECT user_id,TO_CHAR(register_date,'YYYY-MM-DD-HH24:MM:SS') as TIME FROM connect_list  order by register_date DESC", (err, response) => {
-//         if(err == null){
-//             endDBconnection();
-//             data = response.rows[0];
-//             data = JSON.stringify(data);
-
-//           res.render('index', 
-//           { 
-//             title: '대시보드', 
-//             boardNo : req.query.no,
-//             contents : data
-//           });
-//         }else{
-//             console.log(err);
-//         }
-//   });
-// });
 
 // /* 회원가입 */
 // router.get('/sign-in', function(req, res, next) {
@@ -55,14 +35,6 @@ router.get('/',MainController.getMain);
 
 
 module.exports = router;
-
-
-
-// // 첫 실행 시 DB 생성 
-// setTimeout(() => {
-
-//   // DB 연결
-//   client.connect();
 
 //   client.query("SELECT * FROM pg_tables WHERE tablename = 'account'", (err, res) => {
 //       //계정 테이블 없을 경우 생성
@@ -101,29 +73,6 @@ module.exports = router;
 // });
 // }
 
-// function createConnectListTable() {
-//   client.query("CREATE TABLE connect_list"
-//   +"("
-//   + "USER_ID VARCHAR(50) NOT NULL,"
-//   + "register_date timestamp"
-//   + ")", (err, res) => {
-//       console.log("접속 이력 테이블 생성 완료");
-//   });  
-// }
-
-// function createAccountTable() {
-//   client.query("CREATE TABLE ACCOUNT"
-//   +"("
-//   + "USER_ID VARCHAR(50) PRIMARY KEY,"
-//   + "USER_NAME VARCHAR(50) UNIQUE NOT NULL,"
-//   + "PASSWORD VARCHAR(50) NOT NULL,"
-//   + "EMAIL VARCHAR(355) UNIQUE NOT NULL,"
-//   + "CREATED_ON TIMESTAMP NOT NULL,"
-//   + "LAST_LOGIN TIMESTAMP"
-//   + ")", (err, res) => {
-//     console.log("계정 테이블 생성 완료");
-//   });
-// }
 
 // function createBoardTable() {
 //   client.query("CREATE TABLE BOARD"
