@@ -1,7 +1,7 @@
-const { Client } = require('pg');
+const { Pool } = require('pg');
 
 //DB 정보 세팅 
-const pool = new Client({
+const pool = new Pool({
     user : 'mcnc',
     host : 'vue-db',
     //host : 'localhost',

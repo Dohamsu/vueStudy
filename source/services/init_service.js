@@ -6,24 +6,22 @@ exports.init = async() => {
 
         try{
             //db 연결
-            pool.connect();
+            const client = await pool.connect();
     
-            let searchConnectT = await pool.query(InitQuery.searchConnectTable);
-            let searchAccountT = await pool.query(AccountQuery.searchAccountTable);
+            let searchConnectT = await client.query(InitQuery.searchConnectTable);
+            let searchAccountT = await client.query(AccountQuery.searchAccountTable);
     
                 if(searchConnectT.err == null|| searchConnectT.err == undefined){
                     //접속 테이블 없을 경우 생성
                     if(searchConnectT.rows.length < 1){
-                      //테이블 생성
-                        let createTable = await pool.query(InitQuery.createConnectList);
+                        let createTable = await client.query(InitQuery.createConnectList);
                     } 
                 }
 
                 if(searchAccountT.err == null|| searchAccountT.err == undefined){
                     //계정 테이블 없을 경우 생성
                     if(searchAccountT.rows.length < 1){
-                      //테이블 생성
-                        let createTable = await pool.query(AccountQuery.createAccountList);
+                        let createTable = await client.query(AccountQuery.createAccountList);
                     } 
                 }
 
@@ -32,11 +30,8 @@ exports.init = async() => {
 
                 console.log("searchAccountT============================");
                 console.log(searchAccountT.rows);
-
         
-            setTimeout(function(){
-                pool.end();
-            },3000)
+            client.release();
 
         } catch(err){
             console.log(err);
