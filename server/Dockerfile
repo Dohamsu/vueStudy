@@ -17,6 +17,7 @@ COPY . .
 # 명령어 실행 - 내부적으로 /bin/sh -c 뒤에 명령어를 실행하는 방식
 RUN npm install
 RUN npm install pg
+RUN npm install cors
 RUN npm install -g nodemon
 
 #CMD 

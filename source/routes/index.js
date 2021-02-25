@@ -1,13 +1,16 @@
 var express = require('express');
+var cors = require('cors');
 var router  = express.Router();
 var app     = express();
 
 const InitController  = require('../controllers/init_controller');
 const BoardController = require('../controllers/board_controller');
+const AccountController = require('../controllers/account_controller');
 const MainController  = require('../controllers/main_controller');
 
 router.get('/', MainController.getMain);
 router.get('/init', InitController.getInit);
+router.get('/account', cors(),AccountController.getAccount);
 
 
 // /* 회원가입 */
