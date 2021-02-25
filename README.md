@@ -3,7 +3,7 @@
 
 환경 설정
 
-client - Vue
+client - Vue / Vue-cli
 
 Server - Node.js, Express
 
