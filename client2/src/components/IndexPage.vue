@@ -17,7 +17,9 @@ export default {
     created() {
         this.$http.get('http://localhost:80/account')
             .then((res) => {
-                console.log(res);
+                
+                console.table(res.data);
+
                 const user = res.data[0];
                 if (user) this.user = user;
             })

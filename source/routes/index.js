@@ -7,10 +7,12 @@ const InitController  = require('../controllers/init_controller');
 const BoardController = require('../controllers/board_controller');
 const AccountController = require('../controllers/account_controller');
 const MainController  = require('../controllers/main_controller');
+const CrollController  = require('../controllers/croll_controller');
 
 router.get('/', MainController.getMain);
 router.get('/init', InitController.getInit);
 router.get('/account', cors(),AccountController.getAccount);
+router.get('/croll', cors(),CrollController.getHtml);
 
 
 // /* 회원가입 */

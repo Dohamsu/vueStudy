@@ -18,6 +18,8 @@ COPY . .
 RUN npm install
 RUN npm install pg
 RUN npm install cors
+RUN npm install axios
+RUN npm install cheerio
 RUN npm install -g nodemon
 
 #CMD 
