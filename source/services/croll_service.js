@@ -4,9 +4,6 @@ const iconv = require("iconv-lite");
 
 exports.getHtml = () => {
     try {
-
-        var result = "dldl";
-
         console.log("크롤링중....\n");
       
         const getContent = async () => {
@@ -17,9 +14,7 @@ exports.getHtml = () => {
                     mehthod :"GET",
                     responseType : "arraybuffer"
                 });
-            //    console.log(html);
                 const contents = iconv.decode(html.data,"UTF-8");
-                // console.log(contents);
                return contents; 
             }
             catch(error){
@@ -30,7 +25,6 @@ exports.getHtml = () => {
         const crollResult = async () => {
             return getContent()
                 .then(html =>{
-                    // console.log(html.data);
                     let ulList = [];
                     const $ = cheerio.load(html);
                     const $bodyList = $("ul.list_theme");
@@ -42,7 +36,6 @@ exports.getHtml = () => {
                             summary: $(this).find('strong.title.elss').text()
                         };
                     });
-                    // console.log(ulList);
                     const data = ulList.filter(n => n.title);
                 console.log("==============마지막 필터링 데이터 =================");
                 console.log(JSON.stringify(data));
