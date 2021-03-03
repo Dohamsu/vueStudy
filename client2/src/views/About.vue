@@ -4,6 +4,7 @@
 
         <IndexPage />
 
+
   </div>
 </template>
 
@@ -15,6 +16,16 @@ import IndexPage from '@/components/IndexPage.vue'
 export default {
   components: {
     IndexPage
+  },
+
+
+  methods  : {
+
+ 
   }
+ 
+
+
+
 }
 </script>
