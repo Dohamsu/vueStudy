@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link class="navMenu" to="/">Home</router-link> |
+      <router-link class="navMenu" to="/about">About</router-link> |
+      <router-link class="navMenu" to="/signup">signUP</router-link>
     </div>
     <router-view/>
   </div>
@@ -30,3 +31,28 @@
   color: #42b983;
 }
 </style>
+
+
+
+<script>
+
+import "@/assets/css/common.css"
+
+export default {
+  metaInfo : {
+
+  },
+  components : {
+
+  },
+  data : function(){
+    return {}
+  },
+
+  methods : {
+
+  }
+}
+
+
+</script>

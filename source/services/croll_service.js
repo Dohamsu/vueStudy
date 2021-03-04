@@ -29,7 +29,7 @@ exports.getHtml = () => {
                     const $ = cheerio.load(html);
                     const $bodyList = $("ul.list_theme");
                 
-                    console.log("===========  첫번째 돔 ======================");
+                    // console.log("===========  첫번째 돔 ======================");
                     $bodyList.each(function(i, elem) {
                         ulList[i] = {
                             title: $(this).find('em.theme_category').first().text(),
@@ -37,8 +37,8 @@ exports.getHtml = () => {
                         };
                     });
                     const data = ulList.filter(n => n.title);
-                console.log("==============마지막 필터링 데이터 =================");
-                console.log(JSON.stringify(data));
+                // console.log("==============마지막 필터링 데이터 =================");
+                // console.log(JSON.stringify(data));
                 
                 return data;
                 })
