@@ -1,18 +1,31 @@
 var express = require('express');
 var cors = require('cors');
 var router  = express.Router();
-var app     = express();
 
-const InitController  = require('../controllers/init_controller');
-const BoardController = require('../controllers/board_controller');
+const InitController    = require('../controllers/init_controller');
+const BoardController   = require('../controllers/board_controller');
 const AccountController = require('../controllers/account_controller');
-const MainController  = require('../controllers/main_controller');
-const CrollController  = require('../controllers/croll_controller');
+const MainController    = require('../controllers/main_controller');
+const CrollController   = require('../controllers/croll_controller');
 
 router.get('/', MainController.getMain);
 router.get('/init', InitController.getInit);
 router.get('/account', cors(),AccountController.getAccount);
 router.get('/croll', cors(),CrollController.getHtml);
+// router.post('/api/signup', function(req, res, next){
+//     var id       = req.body.id;
+//     var password = req.body.password;
+//     var email    = req.body.email;
+//     console.log("#### 데이터 수신중-------");
+//     console.log(id + password + email);
+
+//     AccountController.addAccount(req);
+
+//     // res.json(req.body);
+
+// });
+router.post('/api/signup', AccountController.addAccount);
+
 
 
 // /* 회원가입 */

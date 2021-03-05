@@ -5,5 +5,5 @@ exports.createAccountList    = "CREATE TABLE ACCOUNT(USER_ID VARCHAR(50) PRIMARY
                             + "EMAIL VARCHAR(355) UNIQUE NOT NULL,"
                             + "CREATED_ON TIMESTAMP NOT NULL,"
                             + "LAST_LOGIN TIMESTAMP)"
-exports.addAccountRow      = "INSERT INTO account (user_id, user_name, password, email,created_on,last_login) VALUES (?, ?, ?, ?, now(), now())"
+exports.addAccount     = "INSERT INTO account (user_id, user_name, password, email, created_on, last_login) VALUES (?, ?, ?, ?, now(), now());"
 exports.searchAccountTable   = "SELECT * FROM pg_tables WHERE tablename = 'account'"

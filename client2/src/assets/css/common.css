@@ -12,3 +12,6 @@ button{ width: 200px; height: 40px; font-size: 20px; margin: 40px;}
 
 
 .imgBox { width: 100px; padding-left: 45%;}
+
+#inputFormBox div{ margin-top: 10px; }
+#inputFormBox label{ margin-right : 10px; }

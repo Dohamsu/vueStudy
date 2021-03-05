@@ -3,12 +3,28 @@
 
         <h2>회원가입</h2>
 
+        <form v-on:submit.prevent="submitData"  id="inputFormBox">
+          <div>
+            <label for="id">ID</label>
+            <input id="id" type="text" ref="id">
+          </div>
+          <div>
+            <label for="password">Password</label>
+            <input id="password" type="password" ref="password">
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="text" ref="email">
+          </div>
+          <div>
+            <button type="submit">SginUp</button>
+          </div>
+        </form>
+
     </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   // name: 'Home',
@@ -17,32 +33,43 @@ export default {
   // }
 
   data : function() {
-   
+    return {};
   }, 
   methods : {
     //전송 데이터 유효성 체크
     validateCheck : function() {
 
-      alert("야호야호 ");
-      // this.$http.get('http://localhost:80/croll')
-      //     .then((res) => {
-              
-      //         console.table(res.data);
-
-      //         const crollData = res.data[0];
-      //         if (crollData) this.crollData = crollData;
-      //     })
-      //     .catch((err) => {
-      //         console.error(err);
-      //     });
     },
     
     //데이터 전송
     submitData : function(){
       this.validateCheck();
-      if(this.errors.length == 0){
-        alert("아니 뭐 엠티도 안된대 ");
-      }
+      var id        = this.$refs.id.value;
+      var password  = this.$refs.password.value;
+      var email     = this.$refs.email.value;
+
+      console.log(id) ;
+      
+        // this.$http.post('http://localhost:80/croll')
+        // .then((res) => {
+            
+        //     console.table(res.data);
+
+        //     const crollData = res.data[0];
+        //     if (crollData) this.crollData = crollData;
+        // })
+        // .catch((err) => {
+        //     console.error(err);
+        // });
+      this.$http.post('http://localhost:80/api/signup',{
+            id : id,
+            password : password,
+            email : email
+        },{
+           headers: {  }
+        }).then(res => {
+        console.log(res.data);
+      })
     }
 
   },
