@@ -13,6 +13,10 @@
             <input id="password" type="password" ref="password">
           </div>
           <div>
+            <label for="password">Name</label>
+            <input id="name" type="text" ref="name">
+          </div>
+          <div>
             <label for="email">Email</label>
             <input id="email" type="text" ref="email">
           </div>
@@ -46,6 +50,7 @@ export default {
       this.validateCheck();
       var id        = this.$refs.id.value;
       var password  = this.$refs.password.value;
+      var name  = this.$refs.name.value;
       var email     = this.$refs.email.value;
 
       console.log(id) ;
@@ -63,12 +68,15 @@ export default {
         // });
       this.$http.post('http://localhost:80/api/signup',{
             id : id,
+            name : name,
             password : password,
             email : email
         },{
            headers: {  }
         }).then(res => {
         console.log(res.data);
+
+        alert("입력 완료");
       })
     }
 

@@ -21,17 +21,14 @@ exports.getAccount = async(accountNo) => {
 
 exports.addAccount = async(accounttInfo) => {
     try{
-
-        console.log(accounttInfo);
+        console.log("############# 쿼리 시작 #################################");
         const client = await pool.connect();
 
-
         let data = await client.query(AccountQuery.addAccount,
-            //  [accounttInfo.id, 
-            //  accounttInfo.name, 
-            //  accounttInfo.password, 
-            //  accounttInfo.email]
-      []      // ["jwonm" , "jinjin","1234","www@mcnc.comkr "]
+             [accounttInfo.id, 
+             accounttInfo.name, 
+             accounttInfo.password, 
+             accounttInfo.email]
              );
 
         client.release();

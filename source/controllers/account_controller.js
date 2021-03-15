@@ -21,7 +21,6 @@ exports.addAccount = async(req, res, next) => {
     try {
         let result = await AccountService.addAccount(accountInfo);
         console.log("서버 정보 전달 완료");
-        console.table(result);
         return res.json(result);
     }catch(err){
         return res.status(500).json(err);
