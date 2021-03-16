@@ -25,6 +25,20 @@
           </div>
         </form>
 
+      <button  v-on:click="onClickBtn" > click </button>
+       
+
+      <div> 
+        <span v-if="another"> 9 곱하기 7은?   </span>
+        <span v-else > 1 곱하기 1은?   </span>
+        
+        <input type="text" ref = "answer">
+
+        <button v-on:click="submitAnser"> 입력!</button>
+        <span >{{resultText}}  </span>
+      </div>
+      
+
     </div>
 </template>
 
@@ -37,8 +51,17 @@ export default {
   // }
 
   data : function() {
-    return {};
-  }, 
+
+    return {
+
+      liked :false,
+      another : false,
+      question : "",
+      resultText : ""
+
+    };
+  },
+
   methods : {
     //전송 데이터 유효성 체크
     validateCheck : function() {
@@ -50,7 +73,7 @@ export default {
       this.validateCheck();
       var id        = this.$refs.id.value;
       var password  = this.$refs.password.value;
-      var name  = this.$refs.name.value;
+      var name      = this.$refs.name.value;
       var email     = this.$refs.email.value;
 
       console.log(id) ;
@@ -77,11 +100,45 @@ export default {
         console.log(res.data);
 
         alert("입력 완료");
-      })
-    }
 
+
+      //input 초기화 
+      this.$refs.id.value = "";
+      this.$refs.password.value = "";
+      this.$refs.name.value = "";
+      this.$refs.email.value = "";
+
+      })
+    },
+
+    onClickBtn : function(){
+
+      if(this.another == true){
+        this.another = false;
+        this.question = "ttlqkf";
+      }else
+      {
+        this.another = true;
+        this.question = "으아ㅏㅏㅏ"
+
+      }
+    },
+
+    submitAnser : function(){
+      
+      var answer = this.$ref.answer.value;
+      if(answer==1){
+        resultText = "정답입니다"
+      }else{
+        resultText = "ㄸ앵ㅇ"
+      }
+
+
+
+    }
   },
-  
+
+
   computed : {
     doubleValue : function(){
       return this.value *2
