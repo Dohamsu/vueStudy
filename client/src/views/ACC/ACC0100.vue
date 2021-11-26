@@ -32,7 +32,7 @@
         <span v-if="another"> 9 곱하기 7은?   </span>
         <span v-else > 1 곱하기 1은?   </span>
         
-        <input type="text" ref = "answer">
+        <input type="text" ref="answer">
 
         <button v-on:click="submitAnser"> 입력!</button>
         <span >{{resultText}}  </span>
@@ -57,7 +57,8 @@ export default {
       liked :false,
       another : false,
       question : "",
-      resultText : ""
+      resultText : "",
+      answer : ""
 
     };
   },
@@ -126,11 +127,13 @@ export default {
 
     submitAnser : function(){
       
-      var answer = this.$ref.answer.value;
+      var answer =  this.$refs.answer.value;
+            console.log(answer) ;
+
       if(answer==1){
-        resultText = "정답입니다"
+        this.resultText = "정답입니다"
       }else{
-        resultText = "ㄸ앵ㅇ"
+        this.resultText = "ㄸ앵ㅇ"
       }
 
 

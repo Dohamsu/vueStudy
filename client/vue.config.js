@@ -2,7 +2,6 @@ const path = require('path');
 
 module.exports={
     outputDir:path.resolve(__dirname,'./dist'),
-
     lintOnSave: process.env.NODE_ENV !== 'production',
 
     devServer : {
@@ -32,8 +31,9 @@ module.exports={
             errors: true
         }
 
-    }
-  
+    },
 
-
+    transpileDependencies: [
+      'vuetify'
+    ]
 }
