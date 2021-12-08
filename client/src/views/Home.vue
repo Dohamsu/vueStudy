@@ -13,3 +13,6 @@
     },
   }
 </script>
+<style>
+  @import "HOM/css/HOM.css";
+</style>
