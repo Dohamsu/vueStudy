@@ -10,7 +10,6 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
     component: Home
   },
   {
@@ -28,6 +27,7 @@ const routes = [
 
 console.log("환경설정");
 console.log(process.env);
+console.log(routes  );
 
 const router = new VueRouter({
   mode: 'history',

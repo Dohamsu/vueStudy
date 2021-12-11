@@ -1,34 +1,26 @@
 <template>
-  <div class="home">
-    <div class="imgBox">
-      <img alt="방탈출 로고" src="">
-    </div>
-
-  <v-app>
-
-    <div class="mainText">
-
-      <span class="mainText"> ddd</span>
-      예약가능 방탈
-
-    </div>
-
-  </v-app>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
-
-
   
+  <v-container class="red">
+    <v-card class="yellow pa-3">
+
+
+    </v-card>
+
+  </v-container>
+
+
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from './components/HOM0100_main.vue'
+// import HelloWorld from './components/HOM0100_main.vue'
 
 export default {
   name: 'Home',
+  data : () =>({}),
   components: {
-    HelloWorld
+    // HelloWorld
+
   }
 }
 </script>
