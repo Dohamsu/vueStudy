@@ -1,6 +1,8 @@
 <template>
+<!-- v-app : vuetify 에서 최상단 컴포넌트로 교체됨 -->
   <v-app>
     <v-card app class="">
+      <!-- 기본 레이아웃 컴포넌트 app 속성 주의 -->
       <v-app-bar app
         color="#6A76AB"
         dark
@@ -19,6 +21,8 @@
         </template>
       </v-app-bar>
     </v-card>
+
+    <!-- vue가 DOM에 마운트 될 때 레이아웃에 비례해 v-main의 크기가 조절됨 -->
     <v-main>
       <!-- 라우터를 쓴다면 삽입 -->
       <router-view/>

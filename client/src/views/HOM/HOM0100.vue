@@ -1,14 +1,21 @@
 <template>
-  
-  <v-container class="red">
-    <v-card class="yellow pa-3">
+  <v-container class="blue">
+    <v-card>
+      <v-card-title>
+        $vuetify.breakpoint.name: {{$vuetify.breakpoint.name}}
+      </v-card-title>
+      <v-card
+        class="red"
+        outlined
+        :height ="cardHeight"
+      >
 
+
+      </v-card>
 
     </v-card>
 
   </v-container>
-
-
 </template>
 
 <script>
@@ -21,7 +28,22 @@ export default {
   components: {
     // HelloWorld
 
+  },
+
+  computed : {
+    cardHeight () {
+      switch(this.$vuetify.breakpoint.name){
+
+        case 'xs' : return 100
+        case 'sm' : return 200
+        case 'md' : return 300
+        case 'xs' : return 100
+        defualt: return 500
+      }
+    }
   }
+
+
 }
 </script>
 
