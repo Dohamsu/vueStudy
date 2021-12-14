@@ -1,15 +1,25 @@
 <template>
 <!-- v-app : vuetify 에서 최상단 컴포넌트로 교체됨 -->
   <v-app>
-    <v-card app class="">
-      <!-- 기본 레이아웃 컴포넌트 app 속성 주의 -->
+      <!-- 기본 레이아웃 컴포넌트 app 속성 주의  해당 속성을 넣어야만 기본 레이아웃으로 적용됨  -->
       <v-app-bar app
         color="#6A76AB"
         dark
+        prominent
+        shrink-on-scroll
+        fade-img-on-scroll
+        scroll-target="#scrolling-techniques-3"
         src="https://picsum.photos/1920/1080?random"
       >
 
-        <v-app-bar-nav-icon @click="drawer =! drawer"> </v-app-bar-nav-icon>
+      <template v-slot:img="{ props }">
+        <v-img
+          v-bind="props"
+          gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
+        ></v-img>
+      </template>
+
+        <v-app-bar-nav-icon @click="drawer = !drawer"> </v-app-bar-nav-icon>
         <!-- 네비게이션 메뉴들  -->
         <template v-slot:extension>
           <v-tabs v-model="tab">
@@ -20,23 +30,32 @@
           </v-tabs>
         </template>
       </v-app-bar>
-    </v-card>
-
-    <!-- vue가 DOM에 마운트 될 때 레이아웃에 비례해 v-main의 크기가 조절됨 -->
-    <v-main>
-      <!-- 라우터를 쓴다면 삽입 -->
-      <router-view/>
-    </v-main>
+      <!-- vue가 DOM에 마운트 될 때 레이아웃에 비례해 v-main의 크기가 조절됨 -->
+      <v-main>
+        <v-sheet
+          id="scrolling-techniques-3"
+          class="overflow-y-auto"          
+          max-height= 350
+          red
+        >
+          <router-view 
+          v-if="drawer" style="height:850px"/>
+        </v-sheet>
+          <!-- 라우터를 쓴다면 삽입 -->
+      </v-main>
   </v-app>
 </template>
 <script>
 
+
 export default {
+  
   name: 'App',
 
   data: () => ({
     //
-    drawer : false,
+    maxHeight : 300,
+    drawer : true,
     tab : null,
     items: [
         { title: 'Home', icon: 'mdi-view-dashboard', to: "/" },
