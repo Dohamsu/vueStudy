@@ -37,8 +37,7 @@ export default {
         case 'xs' : return 100
         case 'sm' : return 200
         case 'md' : return 300
-        case 'xs' : return 100
-        defualt: return 500
+        default: return 500
       }
     }
   }

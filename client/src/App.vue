@@ -9,7 +9,7 @@
         src="https://picsum.photos/1920/1080?random"
       >
 
-        <v-app-bar-nav-icon> </v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click="drawer =! drawer"> </v-app-bar-nav-icon>
         <!-- 네비게이션 메뉴들  -->
         <template v-slot:extension>
           <v-tabs v-model="tab">
@@ -36,7 +36,7 @@ export default {
 
   data: () => ({
     //
-    drawer : "",
+    drawer : false,
     tab : null,
     items: [
         { title: 'Home', icon: 'mdi-view-dashboard', to: "/" },
