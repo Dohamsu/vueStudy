@@ -26,20 +26,25 @@
             <v-tab v-for="item in items" :key="item.title" :to="item.to"> 
               {{item.title}}
             </v-tab>
-
+         <v-switch
+          v-model="darkTheme"
+          :label="`Dark Theme: ${darkTheme.toString()}`"
+        ></v-switch>
           </v-tabs>
+          
         </template>
+
       </v-app-bar>
       <!-- vue가 DOM에 마운트 될 때 레이아웃에 비례해 v-main의 크기가 조절됨 -->
       <v-main>
         <v-sheet
           id="scrolling-techniques-3"
           class="overflow-y-auto"          
-          max-height= 350
+          max-height= 800
           red
         >
           <router-view 
-          v-if="drawer" style="height:850px"/>
+          v-if="drawer"/>
         </v-sheet>
           <!-- 라우터를 쓴다면 삽입 -->
       </v-main>
@@ -54,7 +59,7 @@ export default {
 
   data: () => ({
     //
-    maxHeight : 300,
+    darkTheme: true,
     drawer : true,
     tab : null,
     items: [
