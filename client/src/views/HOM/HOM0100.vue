@@ -3,56 +3,71 @@
     <v-card>
       <v-card-title>
         예약 가능 방탈출 찾기
+        <h3 class="tt dongleFont">dd</h3>
       </v-card-title>
+
+      <!-- main Contents -->
       <v-card
-        class=""
+        class="grey"
         outlined
         :height ="cardHeight"
       >
+
+      <!-- searching Form -->
+      <v-container>
+        <v-row 
+        class="green"
+        justify="center"
+        align="center"
+        >
+          <v-col
+            class="d-flex"
+            cols="12"
+            sm="2"
+          >
+            <v-select
+              :items="regions"
+              label="지역"
+              dense
+              outlined
+            ></v-select>
+          </v-col>
+          <v-col
+            class="d-flex"
+            cols="12"
+            sm="2"
+          >
+            <v-select
+              :items="people"
+              label="인원"
+              dense
+              outlined
+            ></v-select>
+          </v-col>
+          <v-col
+            class="d-flex"
+            cols="12"
+            sm="3"
+          >
+            <v-select
+              :items="theme"
+              label="테마"
+              dense
+              outlined
+            ></v-select>
+          </v-col>
+          <v-btn
+            elevation="2"
+            large
+            color="primary"
+            class="searchBtn"
+          >검색</v-btn>
+        </v-row>
+      </v-container>
+
       <template>
-        <v-container fluid>
-          <v-row align="center">
-            <v-col
-              class="d-flex"
-              cols="12"
-              sm="2"
-            >
-              <v-select
-                :items="regions"
-                label="지역"
-                dense
-                outlined
-              ></v-select>
-            </v-col>
-            <v-col
-              class="d-flex"
-              cols="12"
-              sm="2"
-            >
-              <v-select
-                :items="people"
-                label="인원"
-                dense
-                outlined
-              ></v-select>
-            </v-col>
-            <v-col
-              class="d-flex"
-              cols="12"
-              sm="3"
-            >
-              <v-select
-                :items="theme"
-                label="테마"
-                dense
-                outlined
-              ></v-select>
-            </v-col>
-          </v-row>
-        </v-container>
+        <roomInfoCard/>
       </template>
-
-
 
 
       </v-card>
@@ -62,9 +77,13 @@
   </v-container>
 </template>
 
+<style>
+  @import "./css/HOM.css";
+</style>
+
 <script>
 // @ is an alias to /src
-// import HelloWorld from './components/HOM0100_main.vue'
+import roomInfoCard from './components/HOM0100_main.vue'
 
 export default {
   name: 'Home',
@@ -76,7 +95,7 @@ export default {
 
   }),
   components: {
-    // HelloWorld
+    roomInfoCard
 
   },
 
@@ -95,7 +114,3 @@ export default {
 
 }
 </script>
-
-<style>
-  @import "/css/HOM.css";
-</style>

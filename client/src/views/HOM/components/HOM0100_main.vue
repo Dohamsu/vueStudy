@@ -1,7 +1,9 @@
 <template>
   <div class="hello">
     <h3>{{ msg }}</h3>
-   
+
+    <h3>ddd</h3>
+   이너 컴포넌트입니다
   </div>
 </template>
 
@@ -17,21 +19,4 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-@import "../css/HOM.css";
-
-h3 {
-  margin: 40px 0 0; 
-  color: red;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>

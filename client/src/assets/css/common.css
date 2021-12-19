@@ -1,13 +1,18 @@
 @charset "UTF-8";
 
 
-html, body{ height: 100%; margin: 0; padding: 0; }
-html {font:normal 16px }
+html, body{ height: 100%; margin: 0; padding: 0; 
+
+    }
+html {font:normal 16px; font-family: 'Dongle', sans-serif;}
 img {border: none; width: 100%;}
 p, ul, li, ol, h1, h2, h3, h4, h5, h6, dl, dt, dd, em, figure {margin: 0; padding: 0;}
 
 
-
+h3 {
+    margin: 40px 0 0; 
+    color: red;
+  }
 button{ width: 200px; height: 40px; font-size: 20px; margin: 40px;} 
 
 

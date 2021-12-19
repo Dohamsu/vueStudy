@@ -20,17 +20,19 @@
       </template>
 
         <v-app-bar-nav-icon @click="drawer = !drawer"> </v-app-bar-nav-icon>
+
         <!-- 네비게이션 메뉴들  -->
         <template v-slot:extension>
           <v-tabs v-model="tab">
             <v-tab v-for="item in items" :key="item.title" :to="item.to"> 
               {{item.title}}
             </v-tab>
+          </v-tabs>
          <v-switch
           v-model="darkTheme"
-          :label="`Dark Theme: ${darkTheme.toString()}`"
+          inset
+          :label="`Dark Theme`"
         ></v-switch>
-          </v-tabs>
           
         </template>
 
@@ -50,6 +52,22 @@
       </v-main>
   </v-app>
 </template>
+
+
+<!--font_start -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap');
+.dongleFont {
+  font-family: 'Dongle'; 
+}
+
+  /* @import "@/assets/css/common.css"; */
+
+
+</style>
+<!--font_end -->
+
+
 <script>
 
 
