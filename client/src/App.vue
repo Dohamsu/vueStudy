@@ -59,6 +59,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap');
 .dongleFont {
   font-family: 'Dongle'; 
+  font-size: 2rem;
 }
 
   /* @import "@/assets/css/common.css"; */

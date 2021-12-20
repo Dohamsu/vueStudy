@@ -2,8 +2,52 @@
   <div class="hello">
     <h3>{{ msg }}</h3>
 
-    <h3>ddd</h3>
-   이너 컴포넌트입니다
+
+    <template class="cardRow">
+      <v-row
+        class="blue"
+
+      
+      >
+        <v-col
+        sm="6"
+
+        >
+          <img src="@/images/home.png" alt="ddd" style="height:30px" >
+          <div>
+            빚지고 런던
+          </div>
+        </v-col>
+           <v-col>
+          <img src="@/images/home.png" alt="ddd" style="height:30px" >
+          <div>
+            dd
+          </div>
+        </v-col>
+           <v-col>
+          <img src="@/images/home.png" alt="ddd" style="height:30px" >
+          <div>
+            dd
+          </div>
+        </v-col>
+
+
+
+      </v-row>
+
+
+    </template>
+
+
+
+
+
+
+
+
+
+
+
   </div>
 </template>
 
@@ -15,8 +59,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>

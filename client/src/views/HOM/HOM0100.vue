@@ -1,43 +1,44 @@
 <template>
-  <v-container class="blue">
+  <v-container class="vBody">
     <v-card>
-      <v-card-title>
+      <v-card-title
+      tag="title"
+      >
         예약 가능 방탈출 찾기
-        <h3 class="tt dongleFont">dd</h3>
       </v-card-title>
 
       <!-- main Contents -->
       <v-card
-        class="grey"
+        class=""
         outlined
         :height ="cardHeight"
       >
-
       <!-- searching Form -->
       <v-container>
         <v-row 
-        class="green"
+        class="searchForm"
         justify="center"
         align="center"
         >
           <v-col
             class="d-flex"
-            cols="12"
             sm="2"
           >
             <v-select
+              v-model="selectedRegion"
               :items="regions"
               label="지역"
               dense
               outlined
+              class="region"
             ></v-select>
           </v-col>
           <v-col
             class="d-flex"
-            cols="12"
             sm="2"
           >
             <v-select
+              v-model="selectedPeople"
               :items="people"
               label="인원"
               dense
@@ -46,21 +47,38 @@
           </v-col>
           <v-col
             class="d-flex"
-            cols="12"
-            sm="3"
+            sm="2"
           >
             <v-select
-              :items="theme"
+              v-model="selectedJangr"
+              :items="jangr"
               label="테마"
               dense
+              value
               outlined
+              :class="{'smallFont': selectedJangr ==='스릴러'}"
             ></v-select>
+          </v-col>
+          <v-col
+          sm="1">
+            <div>
+               <v-btn
+            elevation="2"
+            color="primary"
+            class="searchBtn"
+            @click='datePopOpen=!datePopOpen'
+          >검색</v-btn>
+            <v-date-picker v-model="picker"
+             v-show="datePopOpen"
+            ></v-date-picker>
+
+            </div>
           </v-col>
           <v-btn
             elevation="2"
-            large
             color="primary"
             class="searchBtn"
+            @click="searchResult"
           >검색</v-btn>
         </v-row>
       </v-container>
@@ -77,7 +95,7 @@
   </v-container>
 </template>
 
-<style>
+<style scoped>
   @import "./css/HOM.css";
 </style>
 
@@ -88,16 +106,35 @@ import roomInfoCard from './components/HOM0100_main.vue'
 export default {
   name: 'Home',
   data : () =>({
-    items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
     regions: ['서울', '강남', '인천', '강서', '홍대', '혜화'],
     people: ['1명', '2명', '3명', '4명', '5명'],
-    theme: ['어드벤처', '스릴러', '공포', '코미디', '감성', 'SF'],
-
+    jangr: ['어드벤처', '스릴러', '공포', '코미디', '감성', 'SF'],
+    selectedRegion : "",
+    selectedPeople : "",
+    selectedJangr : "",
+    datePopOpen : false,
+    picker : ""
   }),
   components: {
     roomInfoCard
 
   },
+  methods:{
+    searchResult : function(){
+      let region = this.selectedRegion;
+      let people = this.selectedPeople;
+      let jangr = this.selectedJangr ;
+
+
+      alert("선택 지역 : " + region + "\n" +
+            "선택 인원 : " + people +"\n"+
+            "선택 장르 : " + jangr );
+
+    }
+
+
+  },
+
 
   computed : {
     cardHeight () {
