@@ -37,6 +37,10 @@
     font-size: 2rem !important;
 }
 /* 
-.v-select__selection {
-   text-align: center;
-} */
+.v-picker__title {
+   display: none;
+}
+
+.v-picker__body {
+   position: absolute !important;
+}  */

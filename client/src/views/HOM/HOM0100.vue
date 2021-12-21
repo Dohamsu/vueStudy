@@ -60,36 +60,53 @@
             ></v-select>
           </v-col>
           <v-col
-          sm="1">
-            <div>
-               <v-btn
-            elevation="2"
-            color="primary"
-            class="searchBtn"
-            @click='datePopOpen=!datePopOpen'
-          >검색</v-btn>
-            <v-date-picker v-model="picker"
-             v-show="datePopOpen"
-            ></v-date-picker>
-
-            </div>
+            sm="2"
+          >
+              <v-menu
+                v-model="menu2"
+                :close-on-content-click="false"
+                :nudge-right="20"
+                transition="scale-transition"
+                offset-y
+                min-width="auto"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="date"
+                    label="날짜"
+                    prepend-icon="mdi-calendar"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker
+                  v-model="date"
+                  @input="menu2 = false"
+                  locale="ko"
+                  no-title
+                  :day-format="dayFormat"
+                  ></v-date-picker>
+              </v-menu>
           </v-col>
-          <v-btn
-            elevation="2"
-            color="primary"
-            class="searchBtn"
-            @click="searchResult"
-          >검색</v-btn>
+          <v-col>
+
+            <v-btn
+              elevation="2"
+              color="primary"
+              class="searchBtn"
+              @click="searchResult"
+            >검색</v-btn>
+
+          </v-col>
         </v-row>
       </v-container>
 
       <template>
         <roomInfoCard/>
       </template>
-
-
+      
       </v-card>
-
     </v-card>
 
   </v-container>
@@ -113,7 +130,12 @@ export default {
     selectedPeople : "",
     selectedJangr : "",
     datePopOpen : false,
-    picker : ""
+    picker : "",
+    date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+    menu: false,
+    modal: false,
+    menu2: false,
+
   }),
   components: {
     roomInfoCard
@@ -123,14 +145,21 @@ export default {
     searchResult : function(){
       let region = this.selectedRegion;
       let people = this.selectedPeople;
-      let jangr = this.selectedJangr ;
+      let jangr  = this.selectedJangr ;
+      let date   = this.date ;
 
 
       alert("선택 지역 : " + region + "\n" +
             "선택 인원 : " + people +"\n"+
+            "선택 날짜 : " + date +"\n"+
             "선택 장르 : " + jangr );
 
-    }
+    },
+
+    dayFormat(day) {
+			const arr = day.split('-');
+			return Number(arr[arr.length-1]);
+		}
 
 
   },
