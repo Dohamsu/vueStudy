@@ -3,33 +3,40 @@
     <h3>{{ msg }}</h3>
 
 
-    <template class="cardRow">
+    <template class="cardRowT">
       <v-row
-        class="blue"    
-         
+        class="blue cardRow"   
+
       >
         <v-col
           align="center"
           justify="center"
+          v-for="(obj, i) in dataList[0].availList"
+          :key="i"
         >
-          <img src="@/images/home.png" alt="ddd" style="height:30px" >
+          <img class="themeImg" 
+            :src='obj.imgSrc' 
+            alt="사진" 
+            style="height:140px"
+          >
           <div>
-            빚지고 런던
-          </div>
-        </v-col>
-           <v-col
-            align="center"
-            justify="center"
-           >
-          <img src="@/images/home.png" alt="ddd" style="height:30px" >
-          <div>
-            dd
-          </div>
-        </v-col>
-           <v-col>
-          <img src="@/images/home.png" alt="ddd" style="height:30px" >
-          <div>
-            dd
+            <span class="themeName"
+            >{{obj.theme}}</span>
+            <template class="timeTable">  
+              <v-row class="timeList">
+                <v-col class="timeCard"
+                  sm="4"
+                  v-for="(times,i) in obj.timeStamps"
+                  :key="i"
+                >
+                
+                  <v-card class="timeCardInner"
+                      v-text="times">
+                    13:30
+                  </v-card>                
+                </v-col>      
+              </v-row>
+            </template>
           </div>
         </v-col>
       </v-row>
@@ -54,8 +61,13 @@ export default {
        },
        availList : [{
           theme : "네드",
-          imgsrc : "https://keyescape.co.kr/file/theme_info/32_a.jpg",
+          imgSrc : "https://keyescape.co.kr/file/theme_info/32_a.jpg",
           timeStamps : [ "14:40", "16:25"]       
+       },
+       {
+          theme : "고백",
+          imgSrc : "https://keyescape.co.kr/file/theme_info/31_a.jpg",
+          timeStamps : [ "11:25", "13:10", "17:30"]       
        }
 
        ]
