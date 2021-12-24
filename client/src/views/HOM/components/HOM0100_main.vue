@@ -10,12 +10,12 @@
         <v-col
           align="center"
           justify="center"
-          v-for="(obj, i) in dataList[0].availList"
-          :key="i"
+          v-for="(obj, objIndex) in dataList[0].availList"
+          :key="objIndex"
         >
         <v-card
           sm="3"
-          class="my-12"
+          class="my-12 roomCard"
           max-width="250"
 
         >
@@ -35,7 +35,7 @@
 
           <v-card-title
             v-text="obj.theme"
-          >네드</v-card-title>
+          ></v-card-title>
 
           <v-card-text>
             <v-row
@@ -56,17 +56,19 @@
               </div>
             </v-row>
 
-            <div class="my-4 text-subtitle-2 "
+            <div class="my-6 text-subtitle-2 "
                v-text="obj.themeTitle">             
             </div>
 
             <v-btn
             text
-            @click="showDetail=!showDetail"
+            @click="toggleDetail" 
+            v-show="obj.themeDetail"           
             >테마 설명 보기</v-btn>
             <div
-              v-show="showDetail"
+              v-show="active"
               v-text="obj.themeDetail"
+              class="themeDetail"
             ></div>
           </v-card-text>
 
@@ -83,7 +85,7 @@
               v-for="(times, i) in obj.timeStamps"
               :key="i"
               v-text="times"
-              >5:30PM</v-chip>
+              ></v-chip>
             </v-chip-group>
           </v-card-text>
 
@@ -112,6 +114,7 @@ export default {
     msg: String
   },
    data : () =>({
+     active : false,
      showDetail: false,
      selection : [],
      dataList : [{
@@ -159,6 +162,19 @@ export default {
     reserve : function(
     ){
       alert("dd");
+    },
+    // 테마 설명 보기 토글
+    toggleDetail : function(event){
+      let themeDetail = event.target.parentNode.nextSibling;
+
+      if(themeDetail.style.display=="none"){
+        themeDetail.style.display = "";
+      }else{
+        themeDetail.style.display = "none";
+      }
+    },
+    created(){
+       
     }
 
   }
