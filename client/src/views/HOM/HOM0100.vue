@@ -11,7 +11,6 @@
       <v-card
         class=""
         outlined
-        :height ="cardHeight"
       >
       <!-- searching Form -->
       <v-container>
@@ -105,7 +104,7 @@
       <template>
         <roomInfoCard/>
       </template>
-      
+
       </v-card>
     </v-card>
 
@@ -166,12 +165,12 @@ export default {
 
 
   computed : {
-    cardHeight () {
+    mainWidth () {
       switch(this.$vuetify.breakpoint.name){
 
         case 'xs' : return 500
-        case 'sm' : return 900
-        case 'md' : return 1200
+        case 'sm' : return 700
+        case 'md' : return 700
         default: return 500
       }
     }
