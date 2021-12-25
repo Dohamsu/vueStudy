@@ -108,6 +108,8 @@
       </v-card>
     </v-card>
 
+     
+
   </v-container>
 </template>
 
@@ -137,8 +139,8 @@ export default {
 
   }),
   components: {
-    roomInfoCard
-
+    roomInfoCard,
+    
   },
   methods:{
     searchResult : function(){

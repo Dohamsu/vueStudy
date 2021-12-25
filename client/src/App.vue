@@ -21,6 +21,32 @@
 
         <v-app-bar-nav-icon @click="drawer = !drawer"> </v-app-bar-nav-icon>
 
+      <v-spacer></v-spacer>
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon
+        >mdi-heart</v-icon>
+      </v-btn>
+
+
+
+      <v-btn icon
+      @click="dialog = true">
+        <v-icon>mdi-login</v-icon>
+      </v-btn>
+
+     
+        <v-dialog
+        v-model="dialog"
+        >
+          <signInPopup
+          v-bind:dialog="dialog"
+          />
+        </v-dialog>
+
         <!-- 네비게이션 메뉴들  -->
         <template v-slot:extension>
           <v-tabs v-model="tab">
@@ -56,7 +82,9 @@
 
 <!--font_start -->
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap');
+
 .dongleFont {
   font-family: 'Dongle'; 
   font-size: 2rem;
@@ -70,10 +98,11 @@
 
 
 <script>
+import signInPopup from './views/HOM/components/HOM0100_sign.vue'
 
 
 export default {
-  
+
   name: 'App',
 
   data: () => ({
@@ -81,6 +110,7 @@ export default {
     darkTheme: true,
     drawer : true,
     tab : null,
+    dialog : false,
     items: [
         { title: 'Home', icon: 'mdi-view-dashboard', to: "/" },
         { title: 'reservation', icon: 'mdi-image' , to: "/signup"},
@@ -88,6 +118,9 @@ export default {
       ],
       // right: null,
   }),
+      components :{
+        signInPopup
+      },
 
   methods : {
     

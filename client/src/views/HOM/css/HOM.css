@@ -19,7 +19,9 @@
     height: 40px;
 }
 
-
+.themeDetail{
+    text-align: initial;
+}
 
 .smallFont .v-select__selections{
     font-size: 0.9em !important; 

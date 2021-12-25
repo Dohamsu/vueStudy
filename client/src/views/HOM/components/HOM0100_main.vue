@@ -4,17 +4,18 @@
 
     <template class="cardRowT">
       <v-row
-        class=" cardRow"   
+        class=" cardRow"  
+        justify="start"
 
       >
         <v-col
           align="center"
-          justify="center"
           v-for="(obj, objIndex) in dataList[0].availList"
           :key="objIndex"
+          cols='colNumOnRow()'
+
         >
-        <v-card
-          sm="3"
+        <v-card   
           class="my-12 roomCard"
           max-width="250"
 
@@ -63,11 +64,13 @@
             <v-btn
             text
             @click="toggleDetail" 
-            v-show="obj.themeDetail"           
+            v-show="obj.themeDetail"   
             >테마 설명 보기</v-btn>
             <div
               v-show="active"
-              v-text="obj.themeDetail"
+              v-html="obj.themeDetail"
+                            
+
               class="themeDetail"
             ></div>
           </v-card-text>
@@ -85,6 +88,7 @@
               v-for="(times, i) in obj.timeStamps"
               :key="i"
               v-text="times"
+              v-bind:time="times"
               ></v-chip>
             </v-chip-group>
           </v-card-text>
@@ -114,6 +118,11 @@ export default {
     msg: String
   },
    data : () =>({
+     CONST :{
+
+
+     },
+
      active : false,
      showDetail: false,
      selection : [],
@@ -129,7 +138,8 @@ export default {
           timeStamps : [ "14:40", "16:25"],
           themeTitle : "친구의 부탁을 나몰라라 할 순 없지!",
           themeDetail : `친구의 부탁을 나 몰라라 할 순 없지!” 마을에서 말썽꾸러기로 유명한 네드. 어느 날, 그런 네드에게 새벽에 걸려온 친구의 전화. 전화기 너머에서는 친구 아빠 ‘알베리치’가 궂은 날씨에 택배 배달을 나가서 아직 집에 들어오지 않아 걱정이라고 한다. 바로 어제, '요즘 마을에서 이상한 일이 벌어지는 것 같으니, 집에 일찍 일찍 들어오자!'라고 친구와 약속까지 했다는데…. 분명 심상치 않다. 리더인 내가 나서줘야지! 엄마 죄송해요. 통금시간은 못 지킬 거 같아요...
-                      ※ 테마 내부에서 발생한 의류/ 신발의 오염에 대한 보상이 불가하오니, 편한 복장/ 운동화 착용을 권장합니다. (구두/ 치마 비추천) ※ 2인부터 플레이 가능하시나, 추천 인원은 3인이상입니다." `
+                      <br><br>※ 테마 내부에서 발생한 의류/ 신발의 오염에 대한 보상이 불가하오니, 편한 복장/ 운동화 착용을 권장합니다. (구두/ 치마 비추천) 
+                      <br>※ 2인부터 플레이 가능하시나, 추천 인원은 3인이상입니다." `
        },
        {
           theme : "고백",
@@ -150,6 +160,11 @@ export default {
           theme : "엔제리오",
           imgSrc : "https://keyescape.co.kr/file/theme_info/27_a.jpg",
           timeStamps : [ "11:25", "13:10", "17:30"]       
+       },
+        {
+          theme : "엔제리오",
+          imgSrc : "https://keyescape.co.kr/file/theme_info/27_a.jpg",
+          timeStamps : [ "11:25", "13:10", "17:30"]       
        }
 
        ]
@@ -159,9 +174,9 @@ export default {
 
    }),
   methods : {
-    reserve : function(
-    ){
-      alert("dd");
+    reserve : function(event){
+      console.log(event);
+
     },
     // 테마 설명 보기 토글
     toggleDetail : function(event){
@@ -173,11 +188,25 @@ export default {
         themeDetail.style.display = "none";
       }
     },
-    created(){
-       
+      created(){
+        
+      },
+  },
+    computed : {
+
+      //반응형으로 카드 갯수 조절
+      colNumOnRow(){
+        switch(this.$vuetify.breakpoint.name){
+
+          case 'sm' : return 6
+          case 'md' : return 4
+          case 'lg' : return 3
+          default: return 4
+        }
+      }
+
     }
 
-  }
   }
 
 </script>
