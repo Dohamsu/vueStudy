@@ -7,6 +7,11 @@
         </v-card-title>
         <v-card-text>
           <v-container>
+            <v-form
+              ref="form"
+              v-model="formValid"
+              lazy-validation
+            >
             <v-row>
               <v-col
                 cols="6"
@@ -52,6 +57,8 @@
               </v-col>
 
             </v-row>
+
+            </v-form>
           </v-container>
            <v-checkbox
             v-model="agreeCheckBox"
@@ -73,7 +80,7 @@
           <v-btn
             color="blue darken-1"
             text
-            @click="[closeDialog(), submitData()]"
+            @click="[submitData()]"
           >
             확인
           </v-btn>
@@ -83,7 +90,6 @@
 
 
 <script>
-
 export default {
 
   name: 'signUpDialog',
@@ -92,6 +98,7 @@ export default {
     dialog: true,
     passShow : false,
     agreeCheckBox : false,
+    formValid : true,
     formValidate : false, //입력폼 유효성 검증
     userInfo : {
       name : "",
@@ -123,19 +130,35 @@ export default {
     //회원가입 확인
     submitData : function(){
       console.log(this.userInfo);
+      console.log(this.$refs.form.validate());
+      let validate = this.$refs.form.validate();
+
+      if(validate){
+        //개발모드에서 실행시 에러가 뜨나 해당 에러는 배포버전에서는 뜨지 않음- 정상
+        this.$refs.form.reset();
+        this.closeDialog();
+      }
 
     },
 
     closeDialog :function(){
+      this.$refs.form.reset();
+      this.$refs.form.resetValidation()
       this.$emit("dialog_callback");
     },
 
+    formValidation: function(){
+      this.$refs.form.validate();
+    }
    
     
 
   },
   computed : {
 
+  },
+  mounted: function () {
   }
+  
 }
 </script>

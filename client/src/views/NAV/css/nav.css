@@ -2,3 +2,9 @@
 .warningText{
     color: red;
 }
+
+.subMenu div:hover {
+    cursor: pointer;
+    color: royalblue;
+
+}

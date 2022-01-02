@@ -29,18 +29,27 @@
         >mdi-heart</v-icon>
       </v-btn>
 
-
-
       <v-btn icon
       @click="dialog = true">
         <v-icon>mdi-login</v-icon>
       </v-btn>
 
-     
         <v-dialog
         v-model="dialog"
         >
           <signInPopup
+          v-on:dialog_callback="dialogCallback"
+          />
+        </v-dialog>
+      <v-btn icon
+      @click="dialog2 = true">
+        <v-icon>mdi-account-circle</v-icon>
+      </v-btn>
+
+        <v-dialog
+        v-model="dialog2"
+        >
+          <logInPopup
           v-on:dialog_callback="dialogCallback"
           />
         </v-dialog>
@@ -64,10 +73,15 @@
       <!-- vue가 DOM에 마운트 될 때 레이아웃에 비례해 v-main의 크기가 조절됨 -->
 </template>
 
+<style scoped>
+  @import "./css/NAV.css";
+</style>
 
 
 <script>
 import signInPopup from './components/NAV0100_sign.vue'
+import logInPopup from './components/NAV0100_login.vue'
+
 
 export default {
 
@@ -79,15 +93,18 @@ export default {
     drawer : true,
     tab : null,
     dialog : false,
+    dialog2 : false,
     items: [
         { title: 'Home', icon: 'mdi-view-dashboard', to: "/" },
         { title: 'reservation', icon: 'mdi-image' , to: "/signup"},
         { title: 'About', icon: 'mdi-help-box', to : "/about" },
+        { title: 'dododo', icon: 'mdi-help-box', to : "/222" },
       ],
       // right: null,
   }),
       components :{
-        signInPopup        
+        signInPopup,
+        logInPopup        
       },
 
   methods : {
