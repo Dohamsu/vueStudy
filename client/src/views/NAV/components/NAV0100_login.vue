@@ -69,6 +69,11 @@
             로그인
           </v-btn>
                     <v-spacer></v-spacer>
+  <v-img
+    src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+    width="150"
+    @click="kakaoLogin"
+  />
 
         </v-card-actions>
         <v-card-text
@@ -107,7 +112,9 @@
 </template>
 
 
+
 <script>
+
 export default {
 
   name: 'signUpDialog',
@@ -148,6 +155,40 @@ export default {
         this.$refs.form.reset();
         this.closeDialog();
         this.formValidate = true;
+
+      }
+
+    },
+
+    //카카오 로그인
+    kakaoLogin : function(){  
+      // console.log(window.Kakao);
+      let accessToken = localStorage.getItem("KAKAO_ACCESS_TOKEN");
+      if(accessToken){
+        //토큰 있을경우
+        //Kakao.Auth.setAccessToken(accessToken);
+
+      }else{
+        window.Kakao.Auth.login({
+          scope : "profile_nickname",
+          success: function(response) {
+            console.log(response);
+            //로컬 스토리지에 토큰 저장
+            localStorage.setItem("KAKAO_ACCESS_TOKEN", response.access_token);
+  
+  
+             window.Kakao.API.request({
+                url:'/v2/user/me',
+                success : res=> {
+                  console.log(res);
+                }
+  
+             });
+          },
+          fail: function(error) {
+            console.log(error);
+          },
+        });
 
       }
 
