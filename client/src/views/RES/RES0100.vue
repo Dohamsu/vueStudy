@@ -114,12 +114,12 @@
 </template>
 
 <style scoped>
-  @import "./css/HOM.css";
+  @import "./css/res.css";
 </style>
 
 <script>
 // @ is an alias to /src
-import roomInfoCard from './components/HOM0100_main.vue'
+import roomInfoCard from './components/RES0100_list.vue'
 
 export default {
   name: 'Home',

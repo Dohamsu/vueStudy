@@ -20,20 +20,14 @@
         <v-app-bar-nav-icon @click="drawer = !drawer"> </v-app-bar-nav-icon>
 
       <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+      <v-btn
+        class="mt-1 mr-2"
+        v-show="!isLogin"
+        @click="dialog = true"
+        >
+        <v-icon left >mdi-login</v-icon>
+        signIn
       </v-btn>
-
-      <v-btn icon>
-        <v-icon
-        >mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon
-      @click="dialog = true">
-        <v-icon>mdi-login</v-icon>
-      </v-btn>
-
         <v-dialog
         v-model="dialog"
         >
@@ -41,10 +35,52 @@
           v-on:dialog_callback="dialogCallback"
           />
         </v-dialog>
-      <v-btn icon
-      @click="dialog2 = true">
-        <v-icon>mdi-account-circle</v-icon>
+      <v-btn
+        class="mt-1"
+        v-show="!isLogin"
+        @click="dialog2 = true">
+        <v-icon left>mdi-account-circle</v-icon>
+        Login
       </v-btn>
+
+      <v-menu 
+        offset-y
+      >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          icon
+          v-bind="attrs"
+          v-on="on"
+          v-show="isLogin"
+          width="35"
+          height="35"
+          class="mt-1"
+        >
+        <v-avatar
+        width="35"
+        height="35">
+              <img
+                src="https://cdn.vuetifyjs.com/images/john.jpg"
+                alt="John"
+              >
+            </v-avatar>        
+        </v-btn>
+      </template>
+      <v-list dense>
+        <v-list-item-group>
+          <v-list-item
+          @click="showMyInfo">
+              정보보기
+          </v-list-item>
+          <v-list-item
+           @click="logOut">
+            <v-list-item-content>
+              로그아웃
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-menu>
 
         <v-dialog
         v-model="dialog2"
@@ -89,16 +125,17 @@ export default {
 
   data: () => ({
     //
+    isLogin : false,
     darkTheme: true,
     drawer : true,
     tab : null,
     dialog : false,
     dialog2 : false,
     items: [
-        { title: 'Home', icon: 'mdi-view-dashboard', to: "/" },
-        { title: 'reservation', icon: 'mdi-image' , to: "/signup"},
-        { title: 'About', icon: 'mdi-help-box', to : "/about" },
-        { title: 'dododo', icon: 'mdi-help-box', to : "/222" },
+        { title: 'Home',  to: "/" },
+        { title: 'reservation', to: "/reservation"},
+        { title: 'About',  to : "/about" },
+        { title: 'history', to : "/history" },
       ],
       // right: null,
   }),
@@ -109,11 +146,42 @@ export default {
 
   methods : {
     
-     dialogCallback : function(){
-       this.dialog = false;
+    //TODO 현재 로그인 관련 키값은 user_nickname으로 하고있으나 나중에는 세션으로 관리해야함
+    //임시로 해놓은 처리
+    logOut : function(){
 
-     }
+      let result = confirm("로그아웃 하시겠습니까?");
+      if(result){
+        localStorage.removeItem("USER_NICKNAME");
+        this.refeshLoginStat();
+        alert("로그아웃 되었습니다.");
+      }      
+    },
+
+    showMyInfo : function(){
+
+    },
+    
+    dialogCallback : function(){
+      this.dialog  = false;
+      this.dialog2 = false;
+      this.refeshLoginStat();
+    },
+
+    refeshLoginStat : function(){
+      if(localStorage.getItem("USER_NICKNAME")==null){
+        this.isLogin =  false;
+      }else{
+        this.isLogin =  true;
+      }
+    }  
+     
   },
+  computed : {
+  },
+  mounted(){
+    this.refeshLoginStat();
+  }
 
 };
 </script>

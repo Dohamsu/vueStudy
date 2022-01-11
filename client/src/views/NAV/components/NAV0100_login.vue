@@ -61,6 +61,7 @@
             outlined
             large            
             min-width="150px"
+            height="38px"
             @click="[submitData()]"
             color="white"
             class="black"
@@ -68,17 +69,23 @@
           >
             로그인
           </v-btn>
-                    <v-spacer></v-spacer>
-  <v-img
-    src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
-    width="150"
-    @click="kakaoLogin"
-  />
+          <v-spacer></v-spacer>
 
         </v-card-actions>
+        <v-flex
+          class="text-center">
+          <v-btn
+            width="150"            
+          >
+          <v-img
+            src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+            @click="kakaoLogin(closeDialog)"
+            width="150"
+          />
+          </v-btn>
+        </v-flex>
         <v-card-text
          class="mt-8"
-          
         >
           <v-row 
             cols="12"    
@@ -132,7 +139,7 @@ export default {
       email : ""      
     },
     validations:{
-      blankCheck   : input => !!input|| '*항목은 필수입니다',
+      blankCheck   : input => !!input|| '빈칸을 입력해주세요',
 
 
       
@@ -147,7 +154,6 @@ export default {
     //로그인 
     submitData : function(){
       console.log(this.userInfo);
-      console.log(this.$refs.form.validate());
       let validate = this.$refs.form.validate();
 
       if(validate){
@@ -161,13 +167,12 @@ export default {
     },
 
     //카카오 로그인
-    kakaoLogin : function(){  
-      // console.log(window.Kakao);
+    kakaoLogin : function(callback){  
       let accessToken = localStorage.getItem("KAKAO_ACCESS_TOKEN");
+      
       if(accessToken){
-        //토큰 있을경우
-        //Kakao.Auth.setAccessToken(accessToken);
-
+        window.Kakao.Auth.setAccessToken(accessToken);
+        getUserInfo(callback);
       }else{
         window.Kakao.Auth.login({
           scope : "profile_nickname",
@@ -175,23 +180,32 @@ export default {
             console.log(response);
             //로컬 스토리지에 토큰 저장
             localStorage.setItem("KAKAO_ACCESS_TOKEN", response.access_token);
-  
-  
-             window.Kakao.API.request({
-                url:'/v2/user/me',
-                success : res=> {
-                  console.log(res);
-                }
-  
-             });
+            getUserInfo(callback);
           },
           fail: function(error) {
             console.log(error);
+            alert("로그인에 실패했습니다. 잠시 후 다시 시도해주세요.");
           },
         });
 
       }
 
+      function getUserInfo(callback){
+        window.Kakao.API.request({
+          url:'/v2/user/me',
+          success : res=> {
+            console.log("정보 받아오기 성공");
+            localStorage.setItem("USER_NICKNAME", res.properties.nickname); 
+            callback();          
+          },
+           fail: function(error) {
+            console.log(error);
+            alert("로그인에 실패했습니다. 잠시 후 다시 시도해주세요.");
+            localStorage.removeItem("KAKAO_ACCESS_TOKEN"); 
+
+          },
+        });      
+      }
     },
 
     closeDialog :function(){
@@ -218,6 +232,11 @@ export default {
       console.log("회원가입 ");
 
     },
+
+    loginComplete : function(){
+
+
+    }
    
     
 

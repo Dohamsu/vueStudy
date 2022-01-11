@@ -1,7 +1,5 @@
 <template>
-  <div class="">
-
-
+  <div>
     <template class="cardRowT">
       <v-row
         class=" cardRow"  

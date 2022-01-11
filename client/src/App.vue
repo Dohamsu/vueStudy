@@ -6,7 +6,7 @@
         <v-sheet
           id="scrolling-techniques-3"
           class="overflow-y-auto"          
-          max-height= 800
+          max-height= 1500
           red
         >
           <router-view 
@@ -49,9 +49,9 @@ export default {
     tab : null,
     dialog : false,
     items: [
-        { title: 'Home', icon: 'mdi-view-dashboard', to: "/" },
-        { title: 'reservation', icon: 'mdi-image' , to: "/signup"},
-        { title: 'About', icon: 'mdi-help-box', to : "/about" },
+        { title: 'Home', to: "/" },
+        { title: 'reservation' , to: "/reservation"},
+        { title: 'About', to : "/about" },
       ],
       // right: null,
   }),
