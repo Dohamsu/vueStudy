@@ -2,7 +2,7 @@
   <div>
     <template class="cardRowT">
       <v-row
-        class=" cardRow"  
+        class=" cardRow ml-1 mr-1"  
         justify="start"
 
       >

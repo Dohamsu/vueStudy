@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/HOM/HOM0200.vue'
+import Home from '../views/HOM/HOM0100.vue'
 import Reservation from '../views/RES/RES0100.vue'
 import About from '../views/ABO/ABO0100.vue'
 import History from '../views/HIS/HIS0100.vue'

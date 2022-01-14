@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="mt-3 mb-3 ml-3 mr-3">
 
         <h2>회원가입</h2>
 

@@ -1,10 +1,24 @@
 
-.vBody{
-    background-color: blueviolet;
-    font-family: 'dongle';
-    font-size: 2rem;
 
+
+.homeMain::before { 
+    content: "";
+    background-image: url(../../../images/main_back.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.2;
+    position: absolute;
+    top: -244px;
+    left: 0px;
+    right: 0px;
+    bottom: 244px;
+    width: 100%;
+    height: 100vh;
 }
+
+
+
 
 .hide {display: none !important;}
 

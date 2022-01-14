@@ -2,12 +2,12 @@
 <!-- v-app : vuetify 에서 최상단 컴포넌트로 교체됨 -->
   <v-app>
    <navigationBar/>
-      <v-main>
+      <v-main app>
         <v-sheet
           id="scrolling-techniques-3"
           class="overflow-y-auto"          
-          max-height= 1500
           red
+          height="90vh"
         >
           <router-view 
           v-if="drawer"/>
@@ -33,7 +33,18 @@
 
 </style>
 <!--font_end -->
+<style>
+html {
+  overflow: hidden !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+</style>
 
 <script>
 import navigationBar from './views/NAV/NAV0100.vue'

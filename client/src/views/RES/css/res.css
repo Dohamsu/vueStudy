@@ -3,8 +3,30 @@
     background-color: blueviolet;
     font-family: 'dongle';
     font-size: 2rem;
+    height: 800px;
+    
+}
+
+
+
+
+.backImg::before { 
+    content: "";
+    background-image: url(../../../images/layered.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.3;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    height: 100vh;
 
 }
+
+
 
 .hide {display: none !important;}
 
