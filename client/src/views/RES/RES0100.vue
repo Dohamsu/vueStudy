@@ -137,31 +137,32 @@ export default {
     menu: false,
     modal: false,
     menu2: false,
-
+    isPopup : false,
+    msg:"ddd"
   }),
   components: {
-    roomInfoCard,
-    
+    roomInfoCard
   },
   methods:{
     searchResult : function(){
-      let region = this.selectedRegion;
-      let people = this.selectedPeople;
-      let jangr  = this.selectedJangr ;
-      let date   = this.date ;
-
-
-      alert("선택 지역 : " + region + "\n" +
-            "선택 인원 : " + people +"\n"+
-            "선택 날짜 : " + date +"\n"+
-            "선택 장르 : " + jangr );
+      // let region = this.selectedRegion;
+      // let people = this.selectedPeople;
+      // let jangr  = this.selectedJangr ;
+      // let date   = this.date ;
+      this.alert("해당기능은 아직 이용하실 수 없습니다.","error");
 
     },
 
     dayFormat(day) {
 			const arr = day.split('-');
 			return Number(arr[arr.length-1]);
-		}
+		},
+
+
+    alert(msg,type){
+      console.log("커스텀 얼럿");
+      this.$emit("customAlert", msg, type);
+    }
 
 
   },

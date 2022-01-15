@@ -142,8 +142,8 @@ export default {
     },
 
     closeDialog :function(){
-      this.$refs.form.reset();
       this.$refs.form.resetValidation()
+      this.$refs.form.reset();
       this.$emit("dialog_callback");
     },
 

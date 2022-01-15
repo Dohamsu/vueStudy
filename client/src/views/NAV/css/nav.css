@@ -2,6 +2,10 @@
 .warningText{
     color: red;
 }
+.closeBtn:hover{
+    cursor: pointer;
+    color: black;
+}
 
 .subMenu div:hover {
     cursor: pointer;

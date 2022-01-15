@@ -29,6 +29,7 @@
         signIn
       </v-btn>
         <v-dialog
+        persistent
         v-model="dialog"
         >
           <signInPopup
@@ -81,30 +82,22 @@
         </v-list-item-group>
       </v-list>
     </v-menu>
-
         <v-dialog
         v-model="dialog2"
+        persistent
         >
           <logInPopup
           v-on:dialog_callback="dialogCallback"
           />
         </v-dialog>
-
         <!-- 네비게이션 메뉴들  -->
         <template v-slot:extension>
           <v-tabs v-model="tab">
             <v-tab v-for="item in items" :key="item.title" :to="item.to"> 
               {{item.title}}
             </v-tab>
-          </v-tabs>
-         <v-switch
-          v-model="darkTheme"
-          inset
-          :label="`Dark Theme`"
-        ></v-switch>
-          
+          </v-tabs>          
         </template>
-
       </v-app-bar>
       <!-- vue가 DOM에 마운트 될 때 레이아웃에 비례해 v-main의 크기가 조절됨 -->
 </template>
@@ -126,7 +119,6 @@ export default {
   data: () => ({
     //
     isLogin : false,
-    darkTheme: true,
     drawer : true,
     tab : null,
     dialog : false,
@@ -174,7 +166,8 @@ export default {
       }else{
         this.isLogin =  true;
       }
-    }  
+    },
+    
      
   },
   computed : {

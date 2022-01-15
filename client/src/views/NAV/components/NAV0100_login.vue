@@ -10,6 +10,12 @@
             <v-icon>mdi-login</v-icon>
             <span class="text-h5 mb-3 ml-2" >로그인</span>
           </div>
+            <v-spacer></v-spacer>
+          <div>
+            <v-icon large
+            class="closeBtn"
+            @click="closeDialog">mdi-close</v-icon>
+          </div>
         </v-card-title>
         <v-card-text class="pb-0">
           <v-container>
@@ -182,7 +188,7 @@ export default {
             localStorage.setItem("KAKAO_ACCESS_TOKEN", response.access_token);
             getUserInfo(callback);
           },
-          fail: function(error) {
+          fail: (error) => {
             console.log(error);
             alert("로그인에 실패했습니다. 잠시 후 다시 시도해주세요.");
           },
@@ -198,14 +204,14 @@ export default {
             localStorage.setItem("USER_NICKNAME", res.properties.nickname); 
             callback();          
           },
-           fail: function(error) {
+           fail: (error) =>{
             console.log(error);
             alert("로그인에 실패했습니다. 잠시 후 다시 시도해주세요.");
             localStorage.removeItem("KAKAO_ACCESS_TOKEN"); 
 
           },
         });      
-      }
+      }    
     },
 
     closeDialog :function(){
@@ -236,15 +242,16 @@ export default {
     loginComplete : function(){
 
 
-    }
+    },
+
    
-    
 
   },
   computed : {
 
   },
   mounted: function () {
+   
   }
   
 }

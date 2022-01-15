@@ -10,9 +10,13 @@
           height="90vh"
         >
           <router-view 
+          v-on:customAlert="customAlert"
           v-if="drawer"/>
         </v-sheet>
           <!-- 라우터를 쓴다면 삽입 -->
+          <customAlert
+          ref="customAlert"
+          />
       </v-main>
   </v-app>
 </template>
@@ -48,6 +52,7 @@ html::-webkit-scrollbar {
 
 <script>
 import navigationBar from './views/NAV/NAV0100.vue'
+import customAlert from './views/COM/ALE0100.vue'
 
 export default {
 
@@ -67,14 +72,18 @@ export default {
       // right: null,
   }),
       components :{
-        navigationBar,                
+        navigationBar,
+        customAlert             
       },
 
   methods : {
-    
-     onClickImg : function(){
-           this.$router.push({ path: '/about' })
-     },
+    customAlert :function(msg,type){
+      console.log("앱점 표");
+      this.$refs.customAlert.applyMsg(msg,type);
+    }
+  
+
+
   },
 
 };
