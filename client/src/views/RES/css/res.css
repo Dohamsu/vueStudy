@@ -67,8 +67,15 @@
 }
 
 .v-btn__content {
-    font-family: dongle;
+    font-family: dongle !important;
     font-size: 1.2rem;
+}
+
+.v-dialog-wrapper .body-1{
+    font-family: dongle !important;
+    font-size: 1.6rem !important;
+    padding: 20px 30px 20px 30px;
+
 }
 .v-card__subtitle, .v-card__text {
     font-size: 0.75rem;

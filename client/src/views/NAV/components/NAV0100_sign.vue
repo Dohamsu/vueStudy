@@ -21,7 +21,7 @@
                   required
                   dense
                   v-model="userInfo.name"
-                  :rules="[validations.specialCheck, validations.whiteSpaceCheck,validations.blankCheck]"
+                  :rules="[ validations.whiteSpaceCheck, validations.specialCheck, validations.blankCheck]"
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
@@ -90,7 +90,11 @@
 
 
 <script>
+
+import CONST from '../../../plugins/CONST.js'
+
 export default {
+  
 
   name: 'signUpDialog',
 
@@ -109,9 +113,9 @@ export default {
     validations:{
       lengthCheck  : input => input.length <= 10 || '최대 10자까지 가능합니다.',
       lengthCheck2 : input => input.length <= 20 || '최대20자까지 가능합니다.',
-      specialCheck :  input => input.search(/\s/) == -1|| '특수문자는 사용하실 수 없습니다.',
+      specialCheck :  input =>  !/[~!@#$%^&*()_+|<>?:{}]/.test(input)|| '특수문자는 사용하실 수 없습니다.',
       blankCheck   : input => !!input|| '*항목은 필수입니다',
-      whiteSpaceCheck :  input => input.search(/\s/) == -1|| '공백이 포함되어있습니다.',
+      whiteSpaceCheck :  input => !/\s/.test(input)|| '공백이 포함되어있습니다.',
       emailCheck : 
        input => {
             const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -129,16 +133,31 @@ export default {
 
     //회원가입 확인
     submitData : function(){
-      console.log(this.userInfo);
-      console.log(this.$refs.form.validate());
       let validate = this.$refs.form.validate();
 
       if(validate){
-        //개발모드에서 실행시 에러가 뜨나 해당 에러는 배포버전에서는 뜨지 않음- 정상
-        this.$refs.form.reset();
-        this.closeDialog();
+       let id       = this.userInfo.id;
+       let name     = this.userInfo.name;
+       let password = this.userInfo.password;
+       let email    = this.userInfo.email;
+       
+        this.$http.post(CONST.SIGN_UP_URL,{
+            id : id,
+            name : name,
+            password : password,
+            email : email
+        },{
+           headers: {  }
+        }).then(res => {
+          console.log(res.data);
+          this.$refs.form.reset();
+          this.closeDialog();
+          this.$dialog.message.success('회원가입이 완료되었습니다', {
+            position: 'top',
+            timeoot : '500'
+          })
+        })
       }
-
     },
 
     closeDialog :function(){

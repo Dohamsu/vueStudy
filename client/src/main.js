@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 import vuetify from './plugins/vuetify'
+import VuetifyDialog from 'vuetify-dialog'
+import 'vuetify-dialog/dist/vuetify-dialog.css'
 
 Vue.prototype.$http =  axios
 
@@ -15,3 +17,9 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
+
+Vue.use(VuetifyDialog, {
+  context: {
+    vuetify
+  }
+})

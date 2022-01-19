@@ -55,6 +55,7 @@
                 <v-checkbox
                 class="mt-0 mb-0"
                 color="green"
+                v-model="autoLogin"
                 label="로그인 상태 유지"></v-checkbox>
               </v-col>
             </v-row>
@@ -136,6 +137,7 @@ export default {
     dialog: true,
     passShow : false,
     agreeCheckBox : false,
+    autoLogin : false,
     formValid : true,
     formValidate : false, //입력폼 유효성 검증
     userInfo : {
@@ -160,13 +162,26 @@ export default {
     //로그인 
     submitData : function(){
       console.log(this.userInfo);
+      console.log(this.autoLogin);
       let validate = this.$refs.form.validate();
 
       if(validate){
-        //개발모드에서 실행시 에러가 뜨나 해당 에러는 배포버전에서는 뜨지 않음- 정상
+        if(this.autoLogin){
+          console.log("자동로그인 온");
+          localStorage.setItem("AUTO_LOGIN", true);
+        }
+       
+        localStorage.setItem("USER_NICKNAME", this.id); 
+
+        this.$dialog.message.success('로그인 되었습니다', {
+          position: 'bottom'
+        });
+
         this.$refs.form.reset();
         this.closeDialog();
         this.formValidate = true;
+
+
 
       }
 
@@ -186,11 +201,21 @@ export default {
             console.log(response);
             //로컬 스토리지에 토큰 저장
             localStorage.setItem("KAKAO_ACCESS_TOKEN", response.access_token);
+            this.$dialog.message.success('로그인 되었습니다', {
+              position: 'bottom'
+            });
             getUserInfo(callback);
+            
           },
           fail: (error) => {
             console.log(error);
-            alert("로그인에 실패했습니다. 잠시 후 다시 시도해주세요.");
+            this.$dialog.error({
+              text: '로그인에 실패했습니다. 잠시 후 다시 시도해주세요.',
+              title: '오류',
+              persistent: false,
+              waitForResult :false,
+              actions: {true: {text: '확인'}}
+            });
           },
         });
 
@@ -251,6 +276,7 @@ export default {
 
   },
   mounted: function () {
+    console.log( localStorage.getItem("AUTO_LOGIN"));
    
   }
   

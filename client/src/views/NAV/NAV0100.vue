@@ -142,12 +142,37 @@ export default {
     //임시로 해놓은 처리
     logOut : function(){
 
-      let result = confirm("로그아웃 하시겠습니까?");
-      if(result){
-        localStorage.removeItem("USER_NICKNAME");
-        this.refeshLoginStat();
-        alert("로그아웃 되었습니다.");
-      }      
+
+      this.$dialog.confirm({
+          text: '로그아웃 하시겠습니까?',
+          title: '로그아웃',
+          type : 'warning',
+          actions: {
+            false: '취소',
+            true: {
+              text: '확인',
+              handle: () => {
+                return new Promise(resolve => {
+                    localStorage.removeItem("USER_NICKNAME");
+                    this.refeshLoginStat();
+                     this.$dialog.message.success('로그아웃 되었습니다', {
+                      position: 'bottom'
+                    });
+                  setTimeout(resolve, 0)
+                })
+              }
+            }
+          }
+        });
+
+
+
+      // let result = confirm("로그아웃 하시겠습니까?");
+      // if(result){
+      //   localStorage.removeItem("USER_NICKNAME");
+      //   this.refeshLoginStat();
+      //   alert("로그아웃 되었습니다.");
+      // }      
     },
 
     showMyInfo : function(){
