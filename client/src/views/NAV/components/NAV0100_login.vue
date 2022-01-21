@@ -128,6 +128,7 @@
 
 
 <script>
+import CONST from '../../../plugins/CONST.js'
 
 export default {
 
@@ -166,23 +167,38 @@ export default {
       let validate = this.$refs.form.validate();
 
       if(validate){
+           this.$http.post(CONST.LOGIN_URL,{
+            id       : this.userInfo.id,
+            password : this.userInfo.password,
+        },{
+           headers: {  }
+        }).then(res => {
+          console.log(res.data);
+
         if(this.autoLogin){
           console.log("자동로그인 온");
           localStorage.setItem("AUTO_LOGIN", true);
         }
        
         localStorage.setItem("USER_NICKNAME", this.id); 
-
-        this.$dialog.message.success('로그인 되었습니다', {
-          position: 'bottom'
-        });
-
         this.$refs.form.reset();
         this.closeDialog();
         this.formValidate = true;
+        this.$dialog.message.success('로그인 되었습니다', {
+          position: 'bottom',
+          timeout : 1000
+        });
+        })
 
-
-
+        if(this.autoLogin){
+          console.log("자동로그인 온");
+          localStorage.setItem("AUTO_LOGIN", true);
+        }
+       
+        localStorage.setItem("USER_NICKNAME", this.id); 
+        this.$refs.form.reset();
+        this.closeDialog();
+        this.formValidate = true;
       }
 
     },

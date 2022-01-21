@@ -23,14 +23,14 @@
       <v-btn
         class="mt-1 mr-2"
         v-show="!isLogin"
-        @click="dialog = true"
+        @click="showSignPop = true"
         >
         <v-icon left >mdi-login</v-icon>
         signIn
       </v-btn>
         <v-dialog
         persistent
-        v-model="dialog"
+        v-model="showSignPop"
         >
           <signInPopup
           v-on:dialog_callback="dialogCallback"
@@ -39,7 +39,7 @@
       <v-btn
         class="mt-1"
         v-show="!isLogin"
-        @click="dialog2 = true">
+        @click="showLoginPop = true">
         <v-icon left>mdi-account-circle</v-icon>
         Login
       </v-btn>
@@ -83,7 +83,7 @@
       </v-list>
     </v-menu>
         <v-dialog
-        v-model="dialog2"
+        v-model="showLoginPop"
         persistent
         >
           <logInPopup
@@ -121,8 +121,8 @@ export default {
     isLogin : false,
     drawer : true,
     tab : null,
-    dialog : false,
-    dialog2 : false,
+    showSignPop : false,
+    showLoginPop : false,
     items: [
         { title: 'Home',  to: "/" },
         { title: 'reservation', to: "/reservation"},
@@ -141,8 +141,6 @@ export default {
     //TODO 현재 로그인 관련 키값은 user_nickname으로 하고있으나 나중에는 세션으로 관리해야함
     //임시로 해놓은 처리
     logOut : function(){
-
-
       this.$dialog.confirm({
           text: '로그아웃 하시겠습니까?',
           title: '로그아웃',
@@ -156,7 +154,8 @@ export default {
                     localStorage.removeItem("USER_NICKNAME");
                     this.refeshLoginStat();
                      this.$dialog.message.success('로그아웃 되었습니다', {
-                      position: 'bottom'
+                      position: 'bottom',
+                      timeout :1000
                     });
                   setTimeout(resolve, 0)
                 })
@@ -164,15 +163,6 @@ export default {
             }
           }
         });
-
-
-
-      // let result = confirm("로그아웃 하시겠습니까?");
-      // if(result){
-      //   localStorage.removeItem("USER_NICKNAME");
-      //   this.refeshLoginStat();
-      //   alert("로그아웃 되었습니다.");
-      // }      
     },
 
     showMyInfo : function(){
@@ -180,8 +170,8 @@ export default {
     },
     
     dialogCallback : function(){
-      this.dialog  = false;
-      this.dialog2 = false;
+      this.showLoginPop  = false;
+      this.showSignPop = false;
       this.refeshLoginStat();
     },
 
