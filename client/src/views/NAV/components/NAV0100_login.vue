@@ -162,43 +162,61 @@ export default {
 
     //로그인 
     submitData : function(){
-      console.log(this.userInfo);
-      console.log(this.autoLogin);
       let validate = this.$refs.form.validate();
 
       if(validate){
            this.$http.post(CONST.LOGIN_URL,{
-            id       : this.userInfo.id,
-            password : this.userInfo.password,
-        },{
-           headers: {  }
-        }).then(res => {
-          console.log(res.data);
+              id       : this.userInfo.id,
+              password : this.userInfo.password,
+            },{
+              headers: {  }
+            }).then(res => {
+              console.log(res);
+              if(res.status == "200"){
+                if(res.data==false){
+                  this.$dialog.error({
+                    text: '아이디와 비밀번호를 확인해주세요.',
+                    title: '오류',
+                    persistent: false,
+                    waitForResult :false,
+                    actions: {true: {text: '확인'}}
+                  });
+                  return;
+                }
 
-        if(this.autoLogin){
-          console.log("자동로그인 온");
-          localStorage.setItem("AUTO_LOGIN", true);
-        }
-       
-        localStorage.setItem("USER_NICKNAME", this.id); 
-        this.$refs.form.reset();
-        this.closeDialog();
-        this.formValidate = true;
-        this.$dialog.message.success('로그인 되었습니다', {
-          position: 'bottom',
-          timeout : 1000
-        });
-        })
-
-        if(this.autoLogin){
-          console.log("자동로그인 온");
-          localStorage.setItem("AUTO_LOGIN", true);
-        }
-       
-        localStorage.setItem("USER_NICKNAME", this.id); 
-        this.$refs.form.reset();
-        this.closeDialog();
-        this.formValidate = true;
+                if(this.autoLogin){
+                  console.log("자동로그인 온");
+                  localStorage.setItem("AUTO_LOGIN", true);
+                }
+              
+                localStorage.setItem("USER_NICKNAME", this.id); 
+                this.$refs.form.reset();
+                this.closeDialog();
+                this.formValidate = true;
+                this.$dialog.message.success('로그인 되었습니다', {
+                  position: 'bottom',
+                  timeout : 1000
+                });
+              }
+            }) .catch(function (error) {
+            if (error.response) {
+              // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            }
+            else if (error.request) {
+              // 요청이 이루어 졌으나 응답을 받지 못했습니다.
+              // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+              // Node.js의 http.ClientRequest 인스턴스입니다.
+              console.log(error.request);
+            }
+            else {
+              // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
+              console.log('Error', error.message);
+            }
+            console.log(error.config);
+          });
       }
 
     },

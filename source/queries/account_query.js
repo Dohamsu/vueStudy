@@ -1,4 +1,5 @@
-exports.getAccountList       = "SELECT * FROM ACCOUNT"
+exports.getAccountList     = "SELECT * FROM ACCOUNT"
+exports.getLogin           = "SELECT COUNT(*) FROM ACCOUNT where user_id = $1 and password = $2"
 exports.createAccountList    = "CREATE TABLE ACCOUNT(USER_ID VARCHAR(50) PRIMARY KEY,"
                             + "USER_NAME VARCHAR(50) UNIQUE NOT NULL,"
                             + "PASSWORD VARCHAR(50) NOT NULL,"
