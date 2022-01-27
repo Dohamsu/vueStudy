@@ -162,12 +162,13 @@ export default {
 
     //로그인 
     submitData : function(){
+      const sha256 = require("js-sha256").sha256; //Introduced SHA256 library
       let validate = this.$refs.form.validate();
 
       if(validate){
            this.$http.post(CONST.LOGIN_URL,{
               id       : this.userInfo.id,
-              password : this.userInfo.password,
+              password : sha256(this.userInfo.password),
             },{
               headers: {  }
             }).then(res => {

@@ -128,6 +128,7 @@ export default {
         { title: 'reservation', to: "/reservation"},
         { title: 'About',  to : "/about" },
         { title: 'history', to : "/history" },
+        { title: 'croll', to : "/croll" },
       ],
       // right: null,
   }),

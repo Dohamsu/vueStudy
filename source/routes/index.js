@@ -15,7 +15,7 @@ router.get('/account', cors(),AccountController.getAccount);
 router.get('/croll/:site/month=:month&day=:day', cors(),CrollController.getCroll); //방탈 크롤
 router.get('/croll/matjip/keyword=:keyword', cors(),CrollController.getCroll); //맛집 크롤
 // router.get('/croll/question=:question', cors(),CrollController.getCroll); //자연어 처리
-router.get('/API/summoner=:summoner', cors(),APIController.getSummonerInfo); // MMR 서치 API 호출 
+router.get('/api/summoner=:summoner', cors(),APIController.getSummonerInfo); // MMR 서치 API 호출 
 router.post('/api/signup', AccountController.addAccount);
 router.post('/api/login', AccountController.getLogin);
 

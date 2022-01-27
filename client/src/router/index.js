@@ -4,6 +4,7 @@ import Home from '../views/HOM/HOM0100.vue'
 import Reservation from '../views/RES/RES0100.vue'
 import About from '../views/ABO/ABO0100.vue'
 import History from '../views/HIS/HIS0100.vue'
+import Croll from '../views/HOM/components/HOM0100_croll.vue'
 
 Vue.use(VueRouter)
 
@@ -32,6 +33,11 @@ const routes = [
     path: '/history',
     name: 'history',
     component: History
+  },
+  {
+    path: '/croll',
+    name: 'croll',
+    component: Croll
   }
 ]
 

@@ -19,8 +19,6 @@ exports.getLogin = async(req, res, next) => {
     console.log(req.body);   
     try {
        let result = await AccountService.getLogin(accountInfo);
-       console.log("결과값 : " + result);
-       console.log("로그인 정보 전달 완료");
        return res.json(result);
    }catch(err){
        return res.status(500).json(err);

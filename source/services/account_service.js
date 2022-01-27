@@ -15,7 +15,7 @@ exports.getAccount = async(accountNo) => {
 
 exports.getLogin = async(accounttInfo) => {
     try{
-        console.log("############# 쿼리 시작 #################################");
+        console.log("############# 로그인 쿼리 시작 #################################");
         const client = await pool.connect();
         let data = await client.query(AccountQuery.getLogin,
             [
@@ -24,8 +24,11 @@ exports.getLogin = async(accounttInfo) => {
             ]);
 
         client.release();
-        console.log("쿼리 결과 ");
-        console.log(data.rows[0].count);
+        console.log("req : ");
+        console.log(accounttInfo);
+
+        console.log("res : " + data.rows[0].count);
+        console.log("############# 로그인 쿼리 끝 ##########@@@#######################");
 
         return data.rows[0].count>0;
     } catch(err){
@@ -37,7 +40,7 @@ exports.getLogin = async(accounttInfo) => {
 
 exports.addAccount = async(accounttInfo) => {
     try{
-        console.log("############# 쿼리 시작 #################################");
+        console.log("############# 회원가입 쿼리 시작 #################################");
         const client = await pool.connect();
 
         let data = await client.query(AccountQuery.addAccount,
@@ -48,6 +51,8 @@ exports.addAccount = async(accounttInfo) => {
              );
 
         client.release();
+        console.log(data);
+        console.log("############# 회원가입 쿼리 끝 #################################");
 
         return data;
     } catch(err){
