@@ -45,7 +45,12 @@
 .searchBtn {font-size: 1.4rem !important;}
 
 
-
+.dongle_font{
+    font-family: dongle !important; 
+}
+.align_center{
+    text-align: center;
+}
 
 
 /* vuetify 컴포넌트 재정의 */

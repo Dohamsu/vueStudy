@@ -1,10 +1,17 @@
 <template>
-    <v-card
-        width="400px"
-        height="600px"
-        class="mt-3 ml-3"        
+<v-container>
+  <v-layout>
+    <v-flex
+      class="align_center"
     >
-        <h1>칼바람 MMR 검색기</h1>
+        <v-title
+        primary-title
+        class="text-h2 text-center ">
+          <p class="dongle_font">
+            칼바람 MMR  검색기
+
+          </p>
+        </v-title>
             <v-row
             justify="center">
                 <v-col
@@ -36,23 +43,36 @@
             </v-row>
              <v-row
              justify="center"
-             v-show="crollData"
+             v-show="require(`@/images/${imgName}.png`)"
              >       
                 <v-col
                 cols="3">
-                    <div>
-                        <p>
-                            MMR
-                        </p>
-                        <span>
-                            {{mmr}}
-                        </span>
-                        
-                    </div>
+                    <v-img
+                        :src="require(`@/images/${imgName}.png`)"
+                        width="150"
+                    ></v-img>
 
                 </v-col>
             </v-row>
-    </v-card>
+            <v-row
+            justify="center"
+            align-content="center">
+              <v-col
+              cols="4"
+              align-self="center">
+                <p>
+                  {{rank}}
+                </p>
+                      MMR
+                 
+                      {{mmr}}
+
+              </v-col>
+            </v-row>
+    </v-flex>
+  </v-layout>
+
+</v-container>
 </template>
 <style>
   .custom-loader {
@@ -102,6 +122,8 @@ export default {
         id : "",
         user: null,
         mmr : "",
+        rank : "",
+        imgName : "Master",
         crollData : "",
         loader: null,
         loading: false,
@@ -134,9 +156,11 @@ export default {
                     const crollData = res.data;
                     console.log(res.data.closestRank);
                     if (crollData) this.crollData = crollData;
-                    this.mmr =crollData.avg;
+                    this.mmr      = crollData.avg;
+                    this.rank     = crollData.closestRank;
+                    this.imgName  = crollData.closestRank.split(" ")[0];
                     this.loadStop = true;
-                    this.loader = null;
+                    this.loader   = null;
                     setTimeout(() => (this.loading = false), 0)
 
                 })
@@ -144,7 +168,20 @@ export default {
                     console.error(err);
                 });
 
-        },   
+        },
+        getRankImg : function(rank){
+            let imgSrc = "";
+            switch(rank){
+                case "challenger" : imgSrc = "./../../images/main_back.svg"
+                    break;
+                case "grandMaster" : imgSrc = ""
+                    break;
+
+            }
+
+
+            return imgSrc;
+        }   
     },
     watch: {
       loader () {

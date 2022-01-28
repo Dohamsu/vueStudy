@@ -25,7 +25,7 @@
       </v-container>
     </v-main> -->
       <v-parallax
-      src="./../../images/main_back.svg"
+      src="@/images/main_back.svg"
       height="900" >
       <v-row
         align="center"
@@ -44,7 +44,7 @@
       </v-row>
       </v-parallax>
       <v-parallax
-      src="./../../images/main_back2.svg"
+      src="@/images/main_back2.svg"
       height="800" 
       class="">
       <v-row
