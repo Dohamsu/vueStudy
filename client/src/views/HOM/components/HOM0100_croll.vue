@@ -1,38 +1,52 @@
 <template>
-<v-container>
-  <v-layout>
+<v-container
+  justify-center
+>
+  <v-layout
+  justify-center
+  wrap>
     <v-flex
-      class="align_center"
+      xs10 sm8 md8
     >
-        <v-title
+        <div
         primary-title
         class="text-h2 text-center ">
           <p class="dongle_font">
             칼바람 MMR  검색기
-
+            {{breakP}}
           </p>
-        </v-title>
+        </div>
             <v-row
-            justify="center">
+            justify="center"
+            
+            >
                 <v-col
-                cols="6">
+                cols="8"
+                sm="4"
+                md="6"
+                lg="6"
+                
+                >
                     <v-text-field
                     prepend-inner-icon="mdi-account"
                     label="아이디"
-                    required
                     dense
                     outlined
+                    
                     v-model="id"
+                    v-on:keyup.enter="getMMR()"
                     ></v-text-field>
                 </v-col>
             </v-row>
-                <v-divider
-                class="ml-5 mr-5 mb-10" ></v-divider>
             <v-row
              justify="center"
              >
                 <v-col
-                cols="3">
+                cols="4"
+                xs="6"
+                sm="8"
+                class="text-center"
+                >
                     <v-btn
                     :loading="loading"
                     :disabled="loading"
@@ -41,34 +55,40 @@
                     </v-btn>
                 </v-col>
             </v-row>
-             <v-row
-             justify="center"
-             v-show="require(`@/images/${imgName}.png`)"
-             >       
+                <v-divider
+                class="mt-5 mr-5 mb-10" ></v-divider>
+            <div 
+            v-show="crollData">
+              <v-row
+              justify="center"
+              >       
+                  <v-col
+                  cols="3">
+                      <v-img
+                          :src="require(`@/images/${imgName}.png`)"
+                          width="150"
+                      ></v-img>
+
+                  </v-col>
+              </v-row>
+              <v-row
+              justify="center"
+              align-content="center">
                 <v-col
-                cols="3">
-                    <v-img
-                        :src="require(`@/images/${imgName}.png`)"
-                        width="150"
-                    ></v-img>
+                cols="4"
+                align-self="center"
+                class="text-h5 text-center">
+                  <p>
+                    {{rank}}
+                  </p>
+                        MMR
+                  
+                        {{mmr}}
 
                 </v-col>
-            </v-row>
-            <v-row
-            justify="center"
-            align-content="center">
-              <v-col
-              cols="4"
-              align-self="center">
-                <p>
-                  {{rank}}
-                </p>
-                      MMR
-                 
-                      {{mmr}}
+              </v-row>
 
-              </v-col>
-            </v-row>
+            </div>
     </v-flex>
   </v-layout>
 
@@ -127,12 +147,12 @@ export default {
         crollData : "",
         loader: null,
         loading: false,
-        loadStop : false,
+        loadStop : false,        
     }),
     methods  : {
 
         getMMR : function(){
-            console.log(this.id.length);
+          this.crollData = null;
             if(this.id.length<1){
                 this.$dialog.error({
                     text: '아이디를 입력해주세요.',
@@ -151,18 +171,26 @@ export default {
 
             this.$http.get(CONST.MMR_URL+summoner)
                 .then((res) => {
-                    console.table(res.data);
-
-                    const crollData = res.data;
-                    console.log(res.data.closestRank);
-                    if (crollData) this.crollData = crollData;
-                    this.mmr      = crollData.avg;
-                    this.rank     = crollData.closestRank;
-                    this.imgName  = crollData.closestRank.split(" ")[0];
-                    this.loadStop = true;
-                    this.loader   = null;
-                    setTimeout(() => (this.loading = false), 0)
-
+                  console.log(res);
+                  this.loadStop = true;
+                  this.loader   = null;
+                  setTimeout(() => (this.loading = false), 0)
+                  if(res.data=="ERROR"){
+                    this.$dialog.error({
+                      text: '검색 결과가 없습니다.',
+                      title: '오류',
+                      persistent: false,
+                      waitForResult :false,
+                      actions: {true: {text: '확인'}}
+                    });
+                    return;
+                  }
+                  const crollData = res.data;
+                  console.log(res.data.closestRank);
+                  if (crollData) this.crollData = crollData;
+                  this.mmr      = crollData.avg;
+                  this.rank     = crollData.closestRank;
+                  this.imgName  = crollData.closestRank.split(" ")[0];
                 })
                 .catch((err) => {
                     console.error(err);
@@ -183,6 +211,12 @@ export default {
             return imgSrc;
         }   
     },
+    computed:{
+      breakP(){
+        return this.$vuetify.breakpoint.name;
+      }
+
+    },
     watch: {
       loader () {
         const swtich = this.loader;
@@ -190,25 +224,8 @@ export default {
         this.loader = null
       },
     },
-    
-   
-
-
-
-
-
     created() {
-        // this.$http.get('http://localhost:80/account')
-        //     .then((res) => {
-                
-        //         console.table(res.data);
-
-        //         const user = res.data[0];
-        //         if (user) this.user = user;
-        //     })
-        //     .catch((err) => {
-        //         console.error(err);
-        //     });
+       
     }}
 </script>
 
