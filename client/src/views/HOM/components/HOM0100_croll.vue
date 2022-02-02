@@ -63,10 +63,13 @@
               justify="center"
               >       
                   <v-col
-                  cols="3">
+                  cols="6"
+                  sm="3"
+                  md="3"
+                  
+                  >
                       <v-img
                           :src="require(`@/images/${imgName}.png`)"
-                          width="150"
                       ></v-img>
 
                   </v-col>

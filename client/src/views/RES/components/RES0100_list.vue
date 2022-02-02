@@ -14,8 +14,8 @@
 
         >
         <v-card   
-          class="my-12 roomCard"
-          max-width="250"
+          class="mt-3 roomCard"
+          width="250"
 
         >
           <template slot="progress">
@@ -195,9 +195,9 @@ export default {
       //반응형으로 카드 갯수 조절
       colNumOnRow(){
         switch(this.$vuetify.breakpoint.name){
-
-          case 'sm' : return 6
-          case 'md' : return 4
+          case 'xs' : return 3
+          case 'sm' : return 3
+          case 'md' : return 3
           case 'lg' : return 3
           default: return 4
         }

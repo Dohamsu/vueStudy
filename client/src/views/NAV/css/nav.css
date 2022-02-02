@@ -12,3 +12,43 @@
     color: royalblue;
 
 }
+
+header.xsSize{
+    height: 58px !important;
+}
+
+.xsSize .v-toolbar__extension{
+    padding: 0px !important;
+    height: 0px !important;
+
+}
+
+.xsSize.v-tabs{
+    margin-top: 93px !important;
+}
+
+.xsSize .v-tab{
+    padding-left: 12%;
+}
+
+
+.xsSize .v-image{
+    height: 58px !important;
+}
+
+/* ~는 형제 요소 선택 */
+.xsSize ~ .v-main{
+    padding: 52px 0px 0px !important;
+}
+
+.fade-enter-active {
+    transition: opacity .1s;
+}
+
+.fade-leave-active {
+    transition: opacity .2s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+opacity: 0;
+}

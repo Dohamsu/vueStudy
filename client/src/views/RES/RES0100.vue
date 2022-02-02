@@ -23,6 +23,7 @@
             >
               <v-col
                 class="d-flex"
+                cols="4"
                 sm="2"
               >
                 <v-select
@@ -36,6 +37,7 @@
               </v-col>
               <v-col
                 class="d-flex"
+                cols="4"
                 sm="2"
               >
                 <v-select
@@ -48,6 +50,7 @@
               </v-col>
               <v-col
                 class="d-flex"
+                cols="4"
                 sm="2"
               >
                 <v-select
@@ -61,44 +64,44 @@
                 ></v-select>
               </v-col>
               <v-col
+               cols="6"
                 sm="2"
+                :class="{dateCol:true  ,xsSize:$vuetify.breakpoint.mobile}"
               >
-                  <v-menu
-                    v-model="menu2"
-                    :close-on-content-click="false"
-                    :nudge-right="20"
-                    transition="scale-transition"
-                    offset-y
-                    min-width="auto"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="date"
-                        label="날짜"
-                        prepend-icon="mdi-calendar"
-                        readonly
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                    <v-date-picker
+                <v-menu
+                  v-model="menu2"
+                  :close-on-content-click="false"
+                  :nudge-right="20"
+                  transition="scale-transition"
+                  offset-y
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
                       v-model="date"
-                      @input="menu2 = false"
-                      locale="ko"
-                      no-title
-                      :day-format="dayFormat"
-                      ></v-date-picker>
-                  </v-menu>
+                      label="날짜"
+                      prepend-icon="mdi-calendar"
+                      readonly
+                      v-bind="attrs"
+                      v-on="on"
+                      height="48px"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    v-model="date"
+                    @input="menu2 = false"
+                    locale="ko"
+                    no-title
+                    :day-format="dayFormat"
+                    ></v-date-picker>
+                </v-menu>
               </v-col>
               <v-col>
-
                 <v-btn
                   elevation="2"
                   color="primary"
                   class="searchBtn"
                   @click="searchResult"
                 >검색</v-btn>
-
               </v-col>
             </v-row>
           </v-container>

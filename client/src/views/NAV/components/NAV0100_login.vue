@@ -35,6 +35,7 @@
                   outlined
                   v-model="userInfo.id"
                   :rules="[validations.blankCheck]"
+                  v-on:keyup.enter="submitData()"
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
@@ -47,6 +48,7 @@
                   :append-icon="passShow ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="passShow ? 'text' : 'password'"
                   @click:append="passShow = !passShow"
+                  v-on:keyup.enter="submitData()"
                   v-model="userInfo.password"
                   :rules="[validations.blankCheck]"
                 ></v-text-field>
@@ -196,7 +198,7 @@ export default {
                 this.formValidate = true;
                 this.$dialog.message.success('로그인 되었습니다', {
                   position: 'bottom',
-                  timeout : 1000
+                  timeout : 1500
                 });
               }
             }) .catch(function (error) {

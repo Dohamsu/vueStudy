@@ -4,10 +4,12 @@
         color="#6A76AB"
         dark
         prominent
-        shrink-on-scroll
-        fade-img-on-scroll
+        :shrink-on-scroll="!isXsSize"
+        :fade-img-on-scroll="!isXsSize"
         scroll-target="#scrolling-techniques-3"
         src="https://picsum.photos/1920/1080?random"
+        :height='navHeight'
+        :class="{xsSize:isXsSize}"
       >
 
       <template v-slot:img="{ props }">
@@ -17,9 +19,15 @@
         ></v-img>
       </template>
 
-        <v-app-bar-nav-icon @click="drawer = !drawer"> </v-app-bar-nav-icon>
+      <!-- 메뉴 햄버거 버튼 -->
+      <v-app-bar-nav-icon
+        class="hidden-sm-and-up xsSize"
+        @click="xsMenuOpen=!xsMenuOpen"
+      ></v-app-bar-nav-icon>
 
       <v-spacer></v-spacer>
+
+      <!-- 회원가입 버튼 -->
       <v-btn
         class="mt-1 mr-2"
         v-show="!isLogin"
@@ -28,14 +36,15 @@
         <v-icon left >mdi-login</v-icon>
         signIn
       </v-btn>
-        <v-dialog
-        persistent
-        v-model="showSignPop"
-        >
-          <signInPopup
-          v-on:dialog_callback="dialogCallback"
-          />
-        </v-dialog>
+      <v-dialog
+      persistent
+      v-model="showSignPop"
+      >
+        <signInPopup
+        v-on:dialog_callback="dialogCallback"
+        />
+      </v-dialog>
+      <!-- 로그인 버튼 -->
       <v-btn
         class="mt-1"
         v-show="!isLogin"
@@ -43,61 +52,84 @@
         <v-icon left>mdi-account-circle</v-icon>
         Login
       </v-btn>
-
       <v-menu 
-        offset-y
-      >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          icon
-          v-bind="attrs"
-          v-on="on"
-          v-show="isLogin"
+          offset-y
+        >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            icon
+            v-bind="attrs"
+            v-on="on"
+            v-show="isLogin"
+            width="35"
+            height="35"
+            class="mt-1"
+          >
+          <v-avatar
           width="35"
-          height="35"
-          class="mt-1"
+          height="35">
+                <img
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  alt="John"
+                >
+              </v-avatar>        
+          </v-btn>
+        </template>
+        <v-list dense>
+          <v-list-item-group>
+            <v-list-item
+            @click="showMyInfo">
+                정보보기
+            </v-list-item>
+            <v-list-item
+            @click="logOut">
+              <v-list-item-content>
+                로그아웃
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-menu>
+      <v-dialog
+      v-model="showLoginPop"
+      persistent
+      >
+        <logInPopup
+        v-on:dialog_callback="dialogCallback"
+        />
+      </v-dialog>
+
+        <!-- sm 이상 네비게이션 메뉴들  -->
+        <template v-slot:extension
+        :class="{xsSize:isXsSize}"
         >
-        <v-avatar
-        width="35"
-        height="35">
-              <img
-                src="https://cdn.vuetifyjs.com/images/john.jpg"
-                alt="John"
-              >
-            </v-avatar>        
-        </v-btn>
-      </template>
-      <v-list dense>
-        <v-list-item-group>
-          <v-list-item
-          @click="showMyInfo">
-              정보보기
-          </v-list-item>
-          <v-list-item
-           @click="logOut">
-            <v-list-item-content>
-              로그아웃
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-menu>
-        <v-dialog
-        v-model="showLoginPop"
-        persistent
-        >
-          <logInPopup
-          v-on:dialog_callback="dialogCallback"
-          />
-        </v-dialog>
-        <!-- 네비게이션 메뉴들  -->
-        <template v-slot:extension>
-          <v-tabs v-model="tab">
+          <v-tabs v-model="tab"
+            class="hidden-xs-only"
+          >
             <v-tab v-for="item in items" :key="item.title" :to="item.to"> 
               {{item.title}}
             </v-tab>
           </v-tabs>          
+        <!-- xs  네비게이션 메뉴들  -->
+          <transition name="fade">
+            <v-tabs v-model="tab"
+              class="hidden-sm-and-up blue text-center xsSize"
+              v-show="xsMenuOpen"
+              color="white"
+              vertical
+              height="200"
+              
+            >
+              <v-tab 
+              v-for="item in items" :key="item.title" :to="item.to"
+              @click="xsMenuOpen=false"> 
+                {{item.title}}
+              </v-tab>
+            </v-tabs>      
+          </transition>    
         </template>
+
+
       </v-app-bar>
       <!-- vue가 DOM에 마운트 될 때 레이아웃에 비례해 v-main의 크기가 조절됨 -->
 </template>
@@ -119,7 +151,7 @@ export default {
   data: () => ({
     //
     isLogin : false,
-    drawer : true,
+    xsMenuOpen : false,
     tab : null,
     showSignPop : false,
     showLoginPop : false,
@@ -156,7 +188,7 @@ export default {
                     this.refeshLoginStat();
                      this.$dialog.message.success('로그아웃 되었습니다', {
                       position: 'bottom',
-                      timeout :1000
+                      timeout :1500
                     });
                   setTimeout(resolve, 0)
                 })
@@ -187,9 +219,24 @@ export default {
      
   },
   computed : {
+    navHeight() {
+      let height = 100;
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': height = '0px'
+        break
+      }
+      return height;
+    },
+    isXsSize(){
+      return this.$vuetify.breakpoint.name == "xs";
+    }
   },
   mounted(){
     this.refeshLoginStat();
+  },
+  created(){
+    document.querySelector('html').classList.remove('v-app-bar--fade-img-on-scroll','v-app-bar--shrink-on-scroll');
+    document.querySelector('html').classList.remove('xsSize');
   }
 
 };

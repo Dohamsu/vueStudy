@@ -48,6 +48,10 @@ html::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
+
+.v-snack__content{
+  text-align: center !important;
+}
 </style>
 
 <script>
