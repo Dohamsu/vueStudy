@@ -66,13 +66,12 @@
             class="mt-1"
           >
           <v-avatar
-          width="35"
-          height="35">
-                <img
-                  src="https://cdn.vuetifyjs.com/images/john.jpg"
-                  alt="John"
-                >
-              </v-avatar>        
+          width="50"
+          height="50">
+            <v-icon dark large>
+            mdi-account-circle
+            </v-icon>
+          </v-avatar>        
           </v-btn>
         </template>
         <v-list dense>

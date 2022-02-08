@@ -60,7 +60,7 @@
                   dense
                   value
                   outlined
-                  :class="{'smallFont': selectedJangr ==='스릴러'}"
+                  :class="{'smallFont': selectedJangr ==='스릴러'||selectedJangr ==='공포'}"
                 ></v-select>
               </v-col>
               <v-col
@@ -107,7 +107,9 @@
           </v-container>
 
           <template>
-            <roomInfoCard/>
+            <roomInfoCard
+              ref="roomListComponent"            
+            />
           </template>
 
         </v-flex>
@@ -141,18 +143,28 @@ export default {
     modal: false,
     menu2: false,
     isPopup : false,
-    msg:"ddd"
+    msg:"ddd",
+    searchData : {}
   }),
   components: {
     roomInfoCard
   },
   methods:{
     searchResult : function(){
-      // let region = this.selectedRegion;
-      // let people = this.selectedPeople;
-      // let jangr  = this.selectedJangr ;
-      // let date   = this.date ;
-      this.alert("해당기능은 아직 이용하실 수 없습니다.","error");
+      let region = this.selectedRegion;
+      let people = this.selectedPeople;
+      let jangr  = this.selectedJangr ;
+      let date   = this.date;
+      let searchData = {
+        "region" : region,
+        "people" : people,
+        "jangr" : jangr,
+        "month" : date.substr(5,2),
+        "day" :  date.substr(8,2),
+        
+      }
+      this.$refs.roomListComponent.getBangtalInfo(searchData);
+      // this.alert("해당기능은 아직 이용하실 수 없습니다.","error");
 
     },
 

@@ -13,7 +13,6 @@
         class="text-h2 text-center ">
           <p class="dongle_font">
             칼바람 MMR  검색기
-            {{breakP}}
           </p>
         </div>
             <v-row
@@ -22,9 +21,10 @@
             >
                 <v-col
                 cols="8"
-                sm="4"
+                sm="6"
                 md="6"
-                lg="6"
+                lg="4"
+
                 
                 >
                     <v-text-field
@@ -36,6 +36,9 @@
                     v-model="id"
                     v-on:keyup.enter="getMMR()"
                     ></v-text-field>
+                    <p>
+                      *리그오브 레전드 아이디를 사용해 칼바람 모드의 MMR을 검색해보실 수 있습니다.
+                    </p>
                 </v-col>
             </v-row>
             <v-row

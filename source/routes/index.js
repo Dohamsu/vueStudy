@@ -18,6 +18,7 @@ router.get('/croll/matjip/keyword=:keyword', cors(),CrollController.getCroll); /
 router.get('/api/summoner=:summoner', cors(),APIController.getSummonerInfo); // MMR 서치 API 호출 
 router.post('/api/signup', AccountController.addAccount);
 router.post('/api/login', AccountController.getLogin);
+router.post('/api/searchBangtal', CrollController.searchBaltal);
 
 module.exports = router;
 

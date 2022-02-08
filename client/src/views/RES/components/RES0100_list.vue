@@ -95,7 +95,6 @@
             <v-btn
               color="deep-purple lighten-2"
               text
-              @click="reserve"
             >
               예약하기
             </v-btn>
@@ -110,27 +109,32 @@
 </template>
 
 <script>
+import CONST from '../../../plugins/CONST.js'
+
 export default {
   name: 'reserveTables',
-  props: {
-    msg: String
-  },
    data : () =>({
      CONST :{
-
-
      },
 
      active : false,
+     isClick : true,
      showDetail: false,
      selection : [],
+     searchInfo : {
+       region : "혜화",
+       people : "4",
+       jangr : "무관",
+       date : "2021-02-03"
+     },
      dataList : [{
        storeInfo : {
         storeName : "강남 키이스케이프 더오름점",
          addr : "서울 강남구 오오오",
          phone : "02-2222-3333"
        },
-       availList : [{
+       availList : [
+         {
           theme : "네드",
           imgSrc : "https://keyescape.co.kr/file/theme_info/26_a.jpg",
           timeStamps : [ "14:40", "16:25"],
@@ -159,11 +163,11 @@ export default {
           imgSrc : "https://keyescape.co.kr/file/theme_info/27_a.jpg",
           timeStamps : [ "11:25", "13:10", "17:30"]       
        },
-        {
-          theme : "엔제리오",
-          imgSrc : "https://keyescape.co.kr/file/theme_info/27_a.jpg",
-          timeStamps : [ "11:25", "13:10", "17:30"]       
-       }
+      //   {
+      //     theme : "엔제리오",
+      //     imgSrc : "https://keyescape.co.kr/file/theme_info/27_a.jpg",
+      //     timeStamps : [ "11:25", "13:10", "17:30"]       
+      //  }
 
        ]
 
@@ -172,9 +176,35 @@ export default {
 
    }),
   methods : {
-    reserve : function(event){
-      console.log(event);
 
+    getBangtalInfo : function(data){
+
+      //이중클릭 및 무분별한 서버 요청 방지
+      if (this.isClick) {
+          this.isClick = !this.isClick;
+          setTimeout(()=> {
+              this.isClick = true;
+          }, 3000);
+      } else {
+          this.$dialog.warning({
+              text: '검색은 3초에 한번씩만 가능합니다.',
+              title: '정보',
+              persistent: false,
+              waitForResult :false,
+              actions: {true: {text: '확인'}}
+          });
+        return;
+      }
+
+      //서버요청
+      this.$http.post(CONST.BANTAL_ULR,{
+        "searchInfo" : data
+      },{
+          headers: {  }
+      }).then(res => {
+        this.dataList[0].availList = res.data;
+        console.table(res.data);
+      });
     },
     // 테마 설명 보기 토글
     toggleDetail : function(event){
@@ -186,9 +216,8 @@ export default {
         themeDetail.style.display = "none";
       }
     },
-      created(){
-        
-      },
+    created(){
+    },
   },
     computed : {
 

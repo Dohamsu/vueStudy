@@ -25,11 +25,19 @@
 }
 
 .smallFont .v-select__selections{
-    font-size: 0.9em !important; 
+    font-size: 0.85em !important; 
 }
 
 
 .searchBtn {font-size: 1.4rem !important;}
+
+
+.dateCol .v-input__slot{
+    padding-bottom: 5px;
+    height: 32px !important;
+    /* : 0px; */
+
+}
 
 .dateCol.xsSize{
     padding-top: 0px !important;
