@@ -210,6 +210,9 @@ exports.getBantalInfo = (param) => {
             case "secretGarden_CenematicHyewha" : 
                 searchUrl =  "http://www.secretgardenescape.com/reservation.html?k_shopno=11&rdate=2022-" +month +"-" + day+"&prdno=";
                 break;
+            case "secretGarden_DowntownHondae" : 
+                searchUrl =  "http://www.secretgardenescape.com/reservation.html?k_shopno=2&rdate=2022-" +month +"-" + day+"&prdno=";
+                break;
             case "secretGarden" : 
                 searchUrl =  "http://www.secretgardenescape.com/reservation.html?k_shopno=9&rdate=2022-" +month +"-" + day+"&prdno=";
                 break;
@@ -253,11 +256,14 @@ exports.getBantalInfo = (param) => {
                         case "secretGarden_RiverTown" : 
                         case "secretGarden_Hyewha" : 
                         case "secretGarden_CenematicHyewha" : 
+                        case "secretGarden_DowntownHondae" : 
 
                         $bodyList = $(".theme_box");
 
                             $bodyList.each(function(i, elem) {
+
                                 ulList[i] = {
+
                                     theme       : $(this).find('h3.h3_theme').first().text(),
                                     imgSrc      : transImgSrc($(this).find('.theme_pic img').attr("src")),
                                     themeDetail : $(this).find('p.tag_txt').text(),
@@ -286,7 +292,7 @@ exports.getBantalInfo = (param) => {
                         break;
 
                     }
-                    const data = ulList.filter(n => n.timeStamps.length>2);
+                    const data = ulList.filter(n => n.timeStamps.length>0);
                     console.log("==============마지막 필터링 데이터 =================");
                     console.log(JSON.stringify(data));
                     
