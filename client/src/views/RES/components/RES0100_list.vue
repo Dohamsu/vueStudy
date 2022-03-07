@@ -59,7 +59,7 @@
                v-text="obj.themeTitle">             
             </div>
 
-            <v-btn
+            <v-btn            
             text
             @click="toggleDetail" 
             v-show="obj.themeDetail"   
@@ -67,8 +67,6 @@
             <div
               v-show="active"
               v-html="obj.themeDetail"
-                            
-
               class="themeDetail"
             ></div>
           </v-card-text>
@@ -95,6 +93,9 @@
             <v-btn
               color="deep-purple lighten-2"
               text
+              v-show="obj.searchUrl"
+              :url='obj.searchUrl'
+              @click="goToSite"
             >
               예약하기
             </v-btn>
@@ -162,15 +163,7 @@ export default {
           theme : "엔제리오",
           imgSrc : "https://keyescape.co.kr/file/theme_info/27_a.jpg",
           timeStamps : [ "11:25", "13:10", "17:30"]       
-       },
-      //   {
-      //     theme : "엔제리오",
-      //     imgSrc : "https://keyescape.co.kr/file/theme_info/27_a.jpg",
-      //     timeStamps : [ "11:25", "13:10", "17:30"]       
-      //  }
-
-       ]
-
+       }]
      }]
 
 
@@ -208,7 +201,12 @@ export default {
     },
     // 테마 설명 보기 토글
     toggleDetail : function(event){
+      
       let themeDetail = event.target.parentNode.nextSibling;
+      //v-btn을 이용할 시 안의 btn content 를 생성하여 텍스트 이벤트 바인딩을 별도로 생성해줘야함
+      if(event.target.classList.contains("v-btn")){
+          themeDetail = event.target.nextSibling;
+      }
 
       if(themeDetail.style.display=="none"){
         themeDetail.style.display = "";
@@ -216,6 +214,13 @@ export default {
         themeDetail.style.display = "none";
       }
     },
+    goToSite : function(e){
+      let url = e.currentTarget.getAttribute('url')
+
+      window.open(url, "_blank");    
+
+    },
+
     created(){
     },
   },

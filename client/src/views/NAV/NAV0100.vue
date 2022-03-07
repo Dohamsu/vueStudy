@@ -160,6 +160,7 @@ export default {
         { title: 'About',  to : "/about" },
         { title: 'history', to : "/history" },
         { title: 'mmr', to : "/mmr" },
+        { title: 'search', to : "/search" },
       ],
       // right: null,
   }),

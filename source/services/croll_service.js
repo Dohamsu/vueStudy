@@ -25,6 +25,9 @@ exports.getEscapeRoom = (param) => {
             case "secretGarden_CenematicHyewha" : 
                 searchUrl =  "http://www.secretgardenescape.com/reservation.html?k_shopno=11&rdate=2022-" +month +"-" + day+"&prdno=";
                 break;
+            case "secretGarden_MidnightHapjeong" : 
+                searchUrl =  "http://www.secretgardenescape.com/reservation.html?k_shopno=7&rdate=2022-" +month +"-" + day+"&prdno=";
+                break;
             case "secretGarden" : 
                 searchUrl =  "http://www.secretgardenescape.com/reservation.html?k_shopno=9&rdate=2022-" +month +"-" + day+"&prdno=";
                 break;
@@ -73,6 +76,7 @@ exports.getEscapeRoom = (param) => {
                         case "secretGarden_RiverTown" : 
                         case "secretGarden_Hyewha" : 
                         case "secretGarden_CenematicHyewha" : 
+                        case "secretGarden_MidnightHapjeong" : 
 
                             $bodyList = $(".theme_box");
 
@@ -213,6 +217,9 @@ exports.getBantalInfo = (param) => {
             case "secretGarden_DowntownHondae" : 
                 searchUrl =  "http://www.secretgardenescape.com/reservation.html?k_shopno=2&rdate=2022-" +month +"-" + day+"&prdno=";
                 break;
+            case "secretGarden_MidnightHapjeong" : 
+                searchUrl =  "http://www.secretgardenescape.com/reservation.html?k_shopno=7&rdate=2022-" +month +"-" + day+"&prdno=";
+                break;
             case "secretGarden" : 
                 searchUrl =  "http://www.secretgardenescape.com/reservation.html?k_shopno=9&rdate=2022-" +month +"-" + day+"&prdno=";
                 break;
@@ -257,6 +264,7 @@ exports.getBantalInfo = (param) => {
                         case "secretGarden_Hyewha" : 
                         case "secretGarden_CenematicHyewha" : 
                         case "secretGarden_DowntownHondae" : 
+                        case "secretGarden_MidnightHapjeong" : 
 
                         $bodyList = $(".theme_box");
 
@@ -266,8 +274,10 @@ exports.getBantalInfo = (param) => {
 
                                     theme       : $(this).find('h3.h3_theme').first().text(),
                                     imgSrc      : transImgSrc($(this).find('.theme_pic img').attr("src")),
+                                    themeTitle  : $(this).find('p.tag_tt').text(),
                                     themeDetail : $(this).find('p.tag_txt').text(),
                                     timeStamps  : transTimeStamp($(this).find('ul.reserve_Time li a').not(".end").find(".time").text()),
+                                    searchUrl   : searchUrl
                                     
                                 };
                             });

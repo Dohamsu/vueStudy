@@ -4,6 +4,7 @@ import Home from '../views/HOM/HOM0100.vue'
 import Reservation from '../views/RES/RES0100.vue'
 import About from '../views/ABO/ABO0100.vue'
 import History from '../views/HIS/HIS0100.vue'
+import Search from '../views/SEA/SEA0100.vue'
 import MMR from '../views/HOM/components/HOM0100_croll.vue'
 
 Vue.use(VueRouter)
@@ -38,6 +39,11 @@ const routes = [
     path: '/mmr',
     name: 'mmr',
     component: MMR
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: Search
   }
 ]
 
