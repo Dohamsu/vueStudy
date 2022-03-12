@@ -34,7 +34,7 @@
                     outlined
                     
                     v-model="id"
-                    v-on:keyup.enter="getMMR()"
+                    v-on:keypress.enter="getMMR()"
                     ></v-text-field>
                     <p>
                       *리그오브 레전드 아이디를 사용해 칼바람 모드의 MMR을 검색해보실 수 있습니다.

@@ -35,7 +35,7 @@
                   outlined
                   v-model="userInfo.id"
                   :rules="[validations.blankCheck]"
-                  v-on:keyup.enter="submitData()"
+                  v-on:keypress.enter="submitData()"
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
@@ -48,7 +48,7 @@
                   :append-icon="passShow ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="passShow ? 'text' : 'password'"
                   @click:append="passShow = !passShow"
-                  v-on:keyup.enter="submitData()"
+                  v-on:keypress.enter="submitData()"
                   v-model="userInfo.password"
                   :rules="[validations.blankCheck]"
                 ></v-text-field>

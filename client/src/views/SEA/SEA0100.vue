@@ -31,7 +31,7 @@
                   dense
                   outlined                  
                   v-model="searchKeyword"
-                  v-on:keyup.enter="searchInfo()"
+                  v-on:keypress.enter="searchInfo()"
                   ></v-text-field>
               </v-col>
               <v-col>
@@ -93,6 +93,8 @@ export default {
   },
   methods:{  
     searchInfo() {
+
+      console.log("rjatorgn");
       //이중클릭 및 무분별한 서버 요청 방지
       if (this.isClick) {
           this.isClick = !this.isClick;
@@ -121,7 +123,6 @@ export default {
         return;
       }
 
-  console.log(this.searchKeyword);
       //서버요청
       this.$http.post(CONST.BANTAL_INFO_URL,{
         "searchKeyword" : this.searchKeyword
@@ -129,7 +130,7 @@ export default {
           headers: { }
       }).then(res => {
         this.bangtalList = res.data;
-        console.table(res.data);
+        // console.table(res.data);
       });
 		},
     filterOnlyCapsText (value, innerSearchKeyword) {
