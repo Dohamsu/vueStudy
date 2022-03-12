@@ -134,7 +134,7 @@
 </template>
 
 <style scoped>
-  @import "./css/NAV.css";
+  @import "./css/nav.css";
 </style>
 
 
