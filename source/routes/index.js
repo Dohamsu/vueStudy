@@ -8,6 +8,7 @@ const AccountController = require('../controllers/account_controller');
 const MainController    = require('../controllers/main_controller');
 const CrollController   = require('../controllers/croll_controller');
 const APIController     = require('../controllers/api_controller');
+const BangtalController     = require('../controllers/bangtal_controller');
 
 router.get('/', MainController.getMain);
 router.get('/init', InitController.getInit); //서버 초기 세팅
@@ -19,6 +20,7 @@ router.get('/api/summoner=:summoner', cors(),APIController.getSummonerInfo); // 
 router.post('/api/signup', AccountController.addAccount);
 router.post('/api/login', AccountController.getLogin);
 router.post('/api/searchBangtal', CrollController.searchBaltal);
+router.post('/api/searchBangtalInfo', BangtalController.getBantalInfo);
 
 module.exports = router;
 

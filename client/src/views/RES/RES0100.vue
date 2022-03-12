@@ -164,8 +164,6 @@ export default {
         
       }
       this.$refs.roomListComponent.getBangtalInfo(searchData);
-      // this.alert("해당기능은 아직 이용하실 수 없습니다.","error");
-
     },
 
     dayFormat(day) {
@@ -179,6 +177,9 @@ export default {
       this.$emit("customAlert", msg, type);
     }
 
+
+  },
+  mounted(){
 
   },
 

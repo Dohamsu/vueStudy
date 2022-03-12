@@ -26,18 +26,14 @@
                 cols="4"
                 sm="2"
               >
-             
                 <v-text-field
                   label="검색어"
                   dense
-                  outlined
-                  
+                  outlined                  
                   v-model="searchKeyword"
                   v-on:keyup.enter="searchInfo()"
                   ></v-text-field>
-
               </v-col>
-
               <v-col>
                 <v-btn
                   elevation="2"
@@ -50,9 +46,23 @@
           </v-container>
 
           <template>
-            <!-- <roomInfoCard
-              ref="roomListComponent"            
-            /> -->
+            <v-data-table
+              :headers="headers"
+              :items="bangtalList"
+              item-key="pid"
+              class="elevation-1"
+              :search="innerSearchKeyword"
+              :custom-filter="filterOnlyCapsText"
+              no-data-text="검색결과가 없습니다."
+            >
+              <template v-slot:top>
+                <v-text-field
+                  v-model="innerSearchKeyword"
+                  label="결과 내 검색"
+                  class="mx-4"
+                ></v-text-field>
+              </template>
+            </v-data-table>
           </template>
 
         </v-flex>
@@ -63,53 +73,88 @@
 </template>
 
 <style scoped>
+  @import "./css/sea.css";
 </style>
 
 <script>
 // @ is an alias to /src
+import CONST from '../../plugins/CONST.js'
 
 export default {
   name: 'Home',
   data : () =>({
-    searchKeyword : ""
+    searchKeyword : "",
+    innerSearchKeyword: '',
+    isClick : true,
+    bangtalList : []
+
   }),
   components: {
   },
-  methods:{
-    searchResult : function(){
-      let region = this.selectedRegion;
-      let people = this.selectedPeople;
-      let jangr  = this.selectedJangr ;
-      let date   = this.date;
-      let searchData = {
-        "region" : region,
-        "people" : people,
-        "jangr" : jangr,
-        "month" : date.substr(5,2),
-        "day" :  date.substr(8,2),
-        
-      }
-      this.$refs.roomListComponent.getBangtalInfo(searchData);
-      // this.alert("해당기능은 아직 이용하실 수 없습니다.","error");
-
-    },
-
+  methods:{  
     searchInfo() {
-		
+      //이중클릭 및 무분별한 서버 요청 방지
+      if (this.isClick) {
+          this.isClick = !this.isClick;
+          setTimeout(()=> {
+              this.isClick = true;
+          }, 3000);
+      } else {
+          this.$dialog.warning({
+              text: '검색은 3초에 한번씩만 가능합니다.',
+              title: '정보',
+              persistent: false,
+              waitForResult :false,
+              actions: {true: {text: '확인'}}
+          });
+        return;
+      }
+
+      if(this.searchKeyword.length<1){
+          this.$dialog.warning({
+            text: '검색어는 한글자 이상으로 입력해주세요.',
+            title: '주의',
+            persistent: false,
+            waitForResult :false,
+            actions: {true: {text: '확인'}}
+          });
+        return;
+      }
+
+  console.log(this.searchKeyword);
+      //서버요청
+      this.$http.post(CONST.BANTAL_INFO_URL,{
+        "searchKeyword" : this.searchKeyword
+      },{
+          headers: { }
+      }).then(res => {
+        this.bangtalList = res.data;
+        console.table(res.data);
+      });
 		},
-
-
-    alert(msg,type){
-      console.log("커스텀 얼럿");
-      this.$emit("customAlert", msg, type);
-    }
+    filterOnlyCapsText (value, innerSearchKeyword) {
+      return value != null &&
+        innerSearchKeyword != null &&
+        typeof value === 'string' &&
+        value.toString().toLocaleUpperCase().indexOf(innerSearchKeyword) !== -1
+    },
 
 
   },
 
 
   computed : {
-
+    headers () {
+      return [
+        { text: '지역1', value: 'region1' },
+        { text: '지역2', value: 'region2' },
+        { text: '지점명', value: 'store_name' },
+        { text: '테마명', value: 'theme_name' },
+        { text: '평점', value: 'score' },
+        { text: '난이도', value: 'difficulty' },
+        { text: '공포도', value: 'horror' },
+      ]
+    },
   }
 
 
