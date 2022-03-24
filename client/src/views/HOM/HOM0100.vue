@@ -24,46 +24,54 @@
         </v-layout>
       </v-container>
     </v-main> -->
-      <v-parallax
-      src="@/images/main_back.svg"
-      height="900" >
+
       <v-row
         justify="center"
-        class="black--text"
+        class="black--text grey lighten-3"
       >
         <v-col
           class="pt-10 pl-10"
           cols="12"
         >
-          <h1 class="text-h4 mb-5">
-            #공지사항
-          </h1>
-          <div>
-             <p>dohamsu.shop으로 접속할 경우 핸드폰에서 pc버전으로 보이는 현상이 있습니다. 핸드폰으로 접속하실 경우 IP로 접속해주세요.</p>
-              <p>
+          <div class="noticeBox">
+            <h1 class="text-h4 noticeTitle text-center">
+              공지사항
+            </h1>
+             dohamsu.shop으로 접속할 경우 핸드폰에서 pc버전으로 보이는 현상이 있습니다. 핸드폰으로 접속하실 경우 IP로 접속해주세요.
+              <br><br>
                현재 방탈출 예약가능일자 검색 기능의 경우 날짜만 작동하며 검색으로 크롤링해오는 사이트는 아래와 같습니다
                예약가능 시간 외 다른기능은 추후 추가 예정입니다.(평점 조회 등 )
-              </p>
-              <p> <b>  2022.03.07 </b>예약하기 버튼이 업데이트 되었습니다. 이제 예약 카드의 예약하기 버튼을 누르면 해당날짜의 홈페이지로 이동합니다. </p>
-              <li>비밀의화원 다운타운 홍대</li>
-              <li>비밀의화원 혜화</li>
-              <li>비밀의화원 시네마틱 혜화</li>
-              <li>비밀의화원 리버타운 강남</li>
-              <li>비밀의화원 미드나잇 합정</li>
-            
-            <v-divider
-            class="mt-5 mb-5"
-            ></v-divider>
-            외에 작동하는 기능은 아래와 같습니다
-
-            <li>회원가입</li>
-            <li>로그인</li>
-            <li>로그아웃</li>
+              <br><br>
+              <b>  2022.03.07 </b>
+              -  예약하기 버튼이 업데이트 되었습니다. 이제 예약 카드의 예약하기 버튼을 누르면
+                해당날짜의 홈페이지로 이동합니다. 
+              <br><br>
+              <b>  2022.03.25 </b>
+              - 홈페이지 디자인이 리뉴얼 되었습니다.
+          </div>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>            
+          <div class="noticeContent text-center">
+            <v-icon x-large color="black" class="mb-10" >mdi-playlist-check</v-icon>
+            <h1 class="text-h4 mb-5">
+              LIST
+            </h1>
+              비밀의화원 다운타운 홍대
+              <br><br>
+              비밀의화원 혜화
+              <br><br>
+              비밀의화원 시네마틱 혜화
+              <br><br>
+              비밀의화원 리버타운 강남
+              <br><br>
+              비밀의화원 미드나잇 합정
+              <br><br>
           </div>
 
         </v-col>
       </v-row>
-      </v-parallax>
       <v-parallax
       src="@/images/main_back2.svg"
       height="800" 
@@ -78,7 +86,7 @@
           cols="12"
         >
           <h1 class="text-h4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime dolorum deleniti, quasi, cupiditate quis omnis, velit sunt laborum quam consequuntur porro eum pariatur reiciendis quibusdam eos! Vitae iste temporibus explicabo?
+              
           </h1>
 
         </v-col>

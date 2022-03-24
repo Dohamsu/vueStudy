@@ -114,9 +114,9 @@
         <!-- xs  네비게이션 메뉴들  -->
           <transition name="fade">
             <v-tabs v-model="tab"
-              class="hidden-sm-and-up blue text-center xsSize"
+              class="hidden-sm-and-up white text-center xsSize"
               v-show="xsMenuOpen"
-              color="white"
+              color="black"
               vertical
               height="200"
               

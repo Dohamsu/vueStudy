@@ -1,6 +1,3 @@
-
-
-
 .homeMain::before { 
     content: "";
     background-image: url(../../../images/main_back.svg);
@@ -17,6 +14,23 @@
     height: 100vh;
 }
 
+
+.noticeBox{
+    margin-bottom: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.noticeTitle{
+    font-weight: 700 !important;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.noticeContent{
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 1.5rem;
+}
 
 
 
