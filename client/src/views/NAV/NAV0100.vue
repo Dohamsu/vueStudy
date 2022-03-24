@@ -1,21 +1,22 @@
 <template>
   <!-- 기본 레이아웃 컴포넌트 app 속성 주의  해당 속성을 넣어야만 기본 레이아웃으로 적용됨  -->
       <v-app-bar app
-        color="#6A76AB"
-        dark
+        color="white"
         prominent
+        flat
         :shrink-on-scroll="!isXsSize"
-        :fade-img-on-scroll="!isXsSize"
         scroll-target="#scrolling-techniques-3"
-        src="https://picsum.photos/1920/1080?random"
+        src="../../images/door.svg"
         :height='navHeight'
         :class="{xsSize:isXsSize}"
       >
+        <!-- :fade-img-on-scroll="!isXsSize" -->
 
       <template v-slot:img="{ props }">
         <v-img
           v-bind="props"
-          gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
+          contain
+          height="90%"
         ></v-img>
       </template>
 
@@ -68,7 +69,7 @@
           <v-avatar
           width="50"
           height="50">
-            <v-icon dark large>
+            <v-icon  large>
             mdi-account-circle
             </v-icon>
           </v-avatar>        
@@ -103,6 +104,7 @@
         :class="{xsSize:isXsSize}"
         >
           <v-tabs v-model="tab"
+            centered
             class="hidden-xs-only"
           >
             <v-tab v-for="item in items" :key="item.title" :to="item.to"> 
@@ -220,7 +222,7 @@ export default {
   },
   computed : {
     navHeight() {
-      let height = 100;
+      let height = 200;
       switch (this.$vuetify.breakpoint.name) {
         case 'xs': height = '0px'
         break

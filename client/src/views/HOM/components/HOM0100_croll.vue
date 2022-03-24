@@ -1,104 +1,106 @@
 <template>
-<v-container
-  justify-center
->
-  <v-layout
-  justify-center
-  wrap>
-    <v-flex
-      xs10 sm8 md8
+  <v-app>
+    <v-container
+      justify-center
     >
-        <div
-        primary-title
-        class="text-h2 text-center ">
-          <p class="dongle_font">
-            칼바람 MMR  검색기
-          </p>
-        </div>
+      <v-layout
+      justify-center
+      >
+        <v-flex
+          xs10 sm8 md8
+        >
+          <div
+          primary-title
+          class="text-h2 text-center ">
+            <p class="dongle_font">
+              칼바람 MMR  검색기
+            </p>
+          </div>
+          <v-row
+          justify="center"
+          
+          >
+              <v-col
+              cols="8"
+              sm="6"
+              md="6"
+              lg="4"
+
+              
+              >
+                  <v-text-field
+                  prepend-inner-icon="mdi-account"
+                  label="아이디"
+                  dense
+                  outlined
+                  
+                  v-model="id"
+                  v-on:keypress.enter="getMMR()"
+                  ></v-text-field>
+                  <p>
+                    *리그오브 레전드 아이디를 사용해 칼바람 모드의 MMR을 검색해보실 수 있습니다.
+                  </p>
+              </v-col>
+          </v-row>
+          <v-row
+          justify="center"
+          >
+              <v-col
+              cols="4"
+              xs="6"
+              sm="8"
+              class="text-center"
+              >
+                  <v-btn
+                  :loading="loading"
+                  :disabled="loading"
+                  @click="[getMMR()]">
+                      검색
+                  </v-btn>
+              </v-col>
+          </v-row>
+            <v-divider
+            class="mt-5 mr-5 mb-10" ></v-divider>
+          <div 
+          v-show="crollData">
             <v-row
             justify="center"
-            
-            >
+            >       
                 <v-col
-                cols="8"
-                sm="6"
-                md="6"
-                lg="4"
-
+                cols="6"
+                sm="3"
+                md="3"
                 
                 >
-                    <v-text-field
-                    prepend-inner-icon="mdi-account"
-                    label="아이디"
-                    dense
-                    outlined
-                    
-                    v-model="id"
-                    v-on:keypress.enter="getMMR()"
-                    ></v-text-field>
-                    <p>
-                      *리그오브 레전드 아이디를 사용해 칼바람 모드의 MMR을 검색해보실 수 있습니다.
-                    </p>
+                    <v-img
+                        :src="require(`@/images/${imgName}.png`)"
+                    ></v-img>
+
                 </v-col>
             </v-row>
             <v-row
-             justify="center"
-             >
-                <v-col
-                cols="4"
-                xs="6"
-                sm="8"
-                class="text-center"
-                >
-                    <v-btn
-                    :loading="loading"
-                    :disabled="loading"
-                    @click="[getMMR()]">
-                        검색
-                    </v-btn>
-                </v-col>
+            justify="center"
+            align-content="center">
+              <v-col
+              cols="4"
+              align-self="center"
+              class="text-h5 text-center">
+                <p>
+                  {{rank}}
+                </p>
+                      MMR
+                
+                      {{mmr}}
+
+              </v-col>
             </v-row>
-                <v-divider
-                class="mt-5 mr-5 mb-10" ></v-divider>
-            <div 
-            v-show="crollData">
-              <v-row
-              justify="center"
-              >       
-                  <v-col
-                  cols="6"
-                  sm="3"
-                  md="3"
-                  
-                  >
-                      <v-img
-                          :src="require(`@/images/${imgName}.png`)"
-                      ></v-img>
 
-                  </v-col>
-              </v-row>
-              <v-row
-              justify="center"
-              align-content="center">
-                <v-col
-                cols="4"
-                align-self="center"
-                class="text-h5 text-center">
-                  <p>
-                    {{rank}}
-                  </p>
-                        MMR
-                  
-                        {{mmr}}
+          </div>
+        </v-flex>
+      </v-layout>
 
-                </v-col>
-              </v-row>
-
-            </div>
-    </v-flex>
-  </v-layout>
-
-</v-container>
+    </v-container>
+  </v-app>
 </template>
 <style>
   .custom-loader {
