@@ -34,8 +34,11 @@
         v-show="!isLogin"
         @click="showSignPop = true"
         >
-        <v-icon left >mdi-login</v-icon>
-        signIn
+        <v-icon v-if="isXsSize" >mdi-login</v-icon>
+        <v-icon left v-else>mdi-login</v-icon>
+        <span v-show="!isXsSize">
+          signIn
+        </span>
       </v-btn>
       <v-dialog
       persistent
@@ -50,8 +53,11 @@
         class="mt-1"
         v-show="!isLogin"
         @click="showLoginPop = true">
-        <v-icon left>mdi-account-circle</v-icon>
-        Login
+        <v-icon v-if="isXsSize" >mdi-account-circle</v-icon>
+        <v-icon left v-else>mdi-account-circle</v-icon>
+        <span v-show="!isXsSize">
+          Login
+        </span>
       </v-btn>
       <v-menu 
           offset-y

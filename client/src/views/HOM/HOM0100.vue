@@ -30,7 +30,7 @@
         class="black--text grey lighten-3"
       >
         <v-col
-          class="pt-10 pl-10"
+          class=""
           cols="12"
         >
           <div class="noticeBox">
