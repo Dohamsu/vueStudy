@@ -93,8 +93,6 @@ export default {
   },
   methods:{  
     searchInfo() {
-
-      console.log("rjatorgn");
       //이중클릭 및 무분별한 서버 요청 방지
       if (this.isClick) {
           this.isClick = !this.isClick;

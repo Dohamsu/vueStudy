@@ -105,6 +105,15 @@
         />
       </v-dialog>
 
+      <v-dialog
+      v-model="showInfoPop"
+      persistent
+      >
+        <infoPopup
+        v-on:dialog_callback="dialogCallback"
+        />
+      </v-dialog>
+
         <!-- sm 이상 네비게이션 메뉴들  -->
         <template v-slot:extension
         :class="{xsSize:isXsSize}"
@@ -149,6 +158,7 @@
 <script>
 import signInPopup from './components/NAV0100_sign.vue'
 import logInPopup from './components/NAV0100_login.vue'
+import infoPopup from './components/NAV0100_info.vue'
 
 
 export default {
@@ -162,6 +172,7 @@ export default {
     tab : null,
     showSignPop : false,
     showLoginPop : false,
+    showInfoPop : false,
     items: [
         { title: 'Home',  to: "/" },
         { title: 'reservation', to: "/reservation"},
@@ -174,7 +185,8 @@ export default {
   }),
       components :{
         signInPopup,
-        logInPopup        
+        logInPopup,
+        infoPopup
       },
 
   methods : {
@@ -207,12 +219,13 @@ export default {
     },
 
     showMyInfo : function(){
-
+      this.showInfoPop=true;
     },
     
     dialogCallback : function(){
       this.showLoginPop  = false;
-      this.showSignPop = false;
+      this.showSignPop   = false;
+      this.showInfoPop   = false;
       this.refeshLoginStat();
     },
 
