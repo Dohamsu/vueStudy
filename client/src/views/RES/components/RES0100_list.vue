@@ -213,7 +213,6 @@ export default {
           headers: {}
       }).then(res => {
         this.dataList[0].availList = res.data;
-        // console.table(res.data);
         this.isLoading = false;
       });
     },

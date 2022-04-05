@@ -1,4 +1,6 @@
 <template>
+<v-app
+ app>
   <v-card
       max-width="450"
       class="mx-auto mt-15 mb-5"
@@ -33,6 +35,7 @@
       </template>
       </v-list>
   </v-card>
+</v-app>
 </template>
 
 

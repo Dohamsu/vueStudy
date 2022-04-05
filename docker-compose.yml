@@ -25,9 +25,9 @@ services :
       - "3000"
     environment:
       SEQ_DB: vue-db
-      SEQ_USER: mcnc
-      SEQ_PW: gomcnc!!
-      DATABASE_URL: "postgres://mcnc:gomcnc!!@db:5432/vue-db"
+      SEQ_USER: dohamsu
+      SEQ_PW: 1234!!
+      DATABASE_URL: "postgres://rlawlsdnjswk:1234!!@db:5432/vue-db"
     volumes:
       - ./source:/source
       - /source/node_modules
@@ -48,8 +48,8 @@ services :
    environment:
     - TZ=Asia/Seoul
     - POSTGRES_DB=vuedb
-    - POSTGRES_USER=mcnc
-    - POSTGRES_PASSWORD=gomcnc!!
+    - POSTGRES_USER=dohamsu
+    - POSTGRES_PASSWORD=1234!!
     - POSTGRES_INITDB_ARGS=--encoding=UTF-8
   ############################################
 

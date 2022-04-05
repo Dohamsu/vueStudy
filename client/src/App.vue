@@ -21,10 +21,8 @@
   </v-app>
 </template>
 
-
 <!--font_start -->
 <style>
-
 @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap');
 
 .dongleFont {
@@ -82,12 +80,8 @@ export default {
 
   methods : {
     customAlert :function(msg,type){
-      console.log("앱점 표");
       this.$refs.customAlert.applyMsg(msg,type);
     }
-  
-
-
   },
 
 };

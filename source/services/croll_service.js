@@ -5,7 +5,6 @@ const iconv = require("iconv-lite");
 exports.getEscapeRoom = (param) => {
     try {
         console.log("크롤링중....\n");
-      
         console.log("param" + JSON.stringify(param));
 
         let month     =  param.month;
@@ -13,7 +12,6 @@ exports.getEscapeRoom = (param) => {
         let site      =  param.site;
         let keyword   =  param.keyword;
         let searchUrl =  "";
-        console.log("site : " + param.site);
 
         switch(site){
             case "secretGarden_RiverTown" : 
@@ -194,15 +192,10 @@ exports.getMatjip = (param) => {
 
 exports.getBantalInfo = (param) => {
     try {
-        console.log("크롤링중....\n");
-      
-        console.log("param" + JSON.stringify(param));
-
         let month     =  param.month;
         let day       =  param.day;
         let site      =  param.site;
         let searchUrl =  "";
-        console.log("site : " + param.site);
 
         switch(site){
             case "secretGarden_RiverTown" : 
@@ -231,12 +224,8 @@ exports.getBantalInfo = (param) => {
                 break;
         }
 
-
-        console.log("searchUrl : " + searchUrl);
-
         const getContent = async () => {
             try{
-
                 const html = await axios({
                     url: searchUrl,
                     mehthod :"GET",
@@ -271,14 +260,12 @@ exports.getBantalInfo = (param) => {
                             $bodyList.each(function(i, elem) {
 
                                 ulList[i] = {
-
                                     theme       : $(this).find('h3.h3_theme').first().text(),
                                     imgSrc      : transImgSrc($(this).find('.theme_pic img').attr("src")),
                                     themeTitle  : $(this).find('p.tag_tt').text(),
                                     themeDetail : $(this).find('p.tag_txt').text(),
                                     timeStamps  : transTimeStamp($(this).find('ul.reserve_Time li a').not(".end").find(".time").text()),
                                     searchUrl   : searchUrl
-                                    
                                 };
                             });
                         break;
@@ -291,16 +278,10 @@ exports.getBantalInfo = (param) => {
                             $bodyList.each(function(i, elem) {
                                 ulList[i] = {
                                     title: $(this).find('h3.h3_theme').first().text(),
-                                    // summary: $(this).find('p.tag_txt').text(),
-                                    reservableTime:  
-                                        $(this).find('ul.reserve_Time li a').not(".end").find(".time").text(),
-                                    // siteUrl : searchUrl
-                                    
+                                    reservableTime: $(this).find('ul.reserve_Time li a').not(".end").find(".time").text()
                                 };
                             });
-
                         break;
-
                     }
                     const data = ulList.filter(n => n.timeStamps.length>0);
                     console.log("==============마지막 필터링 데이터 =================");
@@ -328,9 +309,4 @@ exports.getBantalInfo = (param) => {
         };
         return returnArray;
     }
-
-
-    
-
-
 };

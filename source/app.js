@@ -32,7 +32,6 @@ app.use('/*', (req, res, next) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// 아래 코드를 app.js 에 추가한다.
 app.listen(3000, '0.0.0.0', () => {                                 
   console.log('#######################################\n서버 시작됨...')                                 
 });
