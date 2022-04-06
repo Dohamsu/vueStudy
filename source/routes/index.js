@@ -1,5 +1,5 @@
 var express = require('express');
-var cors = require('cors');
+var cors    = require('cors');
 var router  = express.Router();
 
 const InitController    = require('../controllers/init_controller');

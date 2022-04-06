@@ -17,19 +17,16 @@
       <v-row
         class=" cardRow ml-1 mr-1"  
         justify="start"
-
       >
         <v-col
           align="center"
           v-for="(obj, objIndex) in dataList[0].availList"
           :key="objIndex"
           cols='colNumOnRow()'
-
         >
         <v-card   
           class="mt-3 roomCard"
           width="250"
-
         >
           <template slot="progress">
             <v-progress-linear
@@ -129,8 +126,6 @@ import CONST from '../../../plugins/CONST.js'
 export default {
   name: 'reserveTables',
    data : () =>({
-     CONST :{
-     },
      isLoading : false,
      active : false,
      isClick : true,
@@ -215,7 +210,7 @@ export default {
         this.dataList[0].availList = res.data;
         this.isLoading = false;
       });
-    },
+    }, 
     // 테마 설명 보기 토글
     toggleDetail : function(event){
       

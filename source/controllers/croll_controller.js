@@ -74,10 +74,6 @@ exports.searchBaltal = async(req, res, next) => {
         let resultData3 = await CrollService.getBantalInfo(param3);
         let resultData4 = await CrollService.getBantalInfo(param4);
         let resultData5 = await CrollService.getBantalInfo(param5);
-        // console.log(typeof(resultData));
-        // console.log(resultData2);
-
-        // return res.status(200).json(resultData);
         return res.status(200) .contentType('text/xml')
         .send(JSON.stringify(resultData.concat(resultData2).concat(resultData3).concat(resultData4).concat(resultData5)));
     }catch(err){

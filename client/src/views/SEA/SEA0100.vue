@@ -128,17 +128,15 @@ export default {
           headers: { }
       }).then(res => {
         this.bangtalList = res.data;
-        // console.table(res.data);
       });
 		},
+    
     filterOnlyCapsText (value, innerSearchKeyword) {
       return value != null &&
         innerSearchKeyword != null &&
         typeof value === 'string' &&
         value.toString().toLocaleUpperCase().indexOf(innerSearchKeyword) !== -1
-    },
-
-
+    }
   },
 
 

@@ -242,11 +242,10 @@ exports.getBantalInfo = (param) => {
         const crollResult = async () => {
             return getContent()
                 .then(html =>{
-                    let ulList = [];
-                    const $ = cheerio.load(html);
+                    let ulList    = [];
+                    const $       = cheerio.load(html);
                     var $bodyList = "";
 
-                    console.log(site);
                     switch(site){
 
                         case "secretGarden_RiverTown" : 
@@ -254,27 +253,21 @@ exports.getBantalInfo = (param) => {
                         case "secretGarden_CenematicHyewha" : 
                         case "secretGarden_DowntownHondae" : 
                         case "secretGarden_MidnightHapjeong" : 
-
-                        $bodyList = $(".theme_box");
-
-                            $bodyList.each(function(i, elem) {
-
-                                ulList[i] = {
-                                    theme       : $(this).find('h3.h3_theme').first().text(),
-                                    imgSrc      : transImgSrc($(this).find('.theme_pic img').attr("src")),
-                                    themeTitle  : $(this).find('p.tag_tt').text(),
-                                    themeDetail : $(this).find('p.tag_txt').text(),
-                                    timeStamps  : transTimeStamp($(this).find('ul.reserve_Time li a').not(".end").find(".time").text()),
-                                    searchUrl   : searchUrl
-                                };
-                            });
-                        break;
-
+                            $bodyList = $(".theme_box");
+                                $bodyList.each(function(i, elem) {
+                                    ulList[i] = {
+                                        theme       : $(this).find('h3.h3_theme').first().text(),
+                                        imgSrc      : transImgSrc($(this).find('.theme_pic img').attr("src")),
+                                        themeTitle  : $(this).find('p.tag_tt').text(),
+                                        themeDetail : $(this).find('p.tag_txt').text(),
+                                        timeStamps  : transTimeStamp($(this).find('ul.reserve_Time li a').not(".end").find(".time").text()),
+                                        searchUrl   : searchUrl
+                                    };
+                                });
+                            break;
                         case "pointNine_Gangnam1" :
                         case "pointNine_Gangnam2" : 
-                        
                             $bodyList = $(".theme_box");
-
                             $bodyList.each(function(i, elem) {
                                 ulList[i] = {
                                     title: $(this).find('h3.h3_theme').first().text(),
@@ -284,9 +277,6 @@ exports.getBantalInfo = (param) => {
                         break;
                     }
                     const data = ulList.filter(n => n.timeStamps.length>0);
-                    console.log("==============마지막 필터링 데이터 =================");
-                    console.log(JSON.stringify(data));
-                    
                     return data;
                 })
         }
